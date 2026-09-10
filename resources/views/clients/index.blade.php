@@ -8,7 +8,6 @@
         </div>
     @endif
 
-
     @if(session('error'))
         <div class="alert alert-danger alert-dismissible fade show" role="alert">
             {{ session('error') }}
@@ -17,14 +16,14 @@
     @endif
 
     <style>
-        #users-table thead th {
+        #clients-table thead th {
             background-color: var(--bs-primary);
             color: #fff;
             --dt-order-arrow_color: rgba(255, 255, 255, 0.5);
             --dt-order-arrow_color-current: #fff;
         }
-        #users-table thead th.dt-orderable-asc:hover,
-        #users-table thead th.dt-orderable-desc:hover {
+        #clients-table thead th.dt-orderable-asc:hover,
+        #clients-table thead th.dt-orderable-desc:hover {
             background-color: var(--bs-primary);
             color: #fff;
         }
@@ -32,10 +31,10 @@
 
     <x-adminlte-card>
         <div class="d-flex justify-content-between align-items-center mb-3">
-            <h5 class="fw-bold mb-0">List of Users</h5>
+            <h5 class="fw-bold mb-0">List of Clients</h5>
 
-            <a href="{{ route('users.create') }}" class="btn btn-primary d-inline-flex align-items-center gap-2">
-                Add User
+            <a href="{{ route('clients.create') }}" class="btn btn-primary d-inline-flex align-items-center gap-2">
+                Add Client
                 <span class="border-start ps-2"><i class="bi bi-plus-lg"></i></span>
             </a>
         </div>
@@ -62,17 +61,16 @@
         </script>
         @endpush
 
-        <x-adminlte-datatable id="users-table"
+        <x-adminlte-datatable id="clients-table"
             :heads="[
-                'ID', 'Name', 'Email', 'Role', 'Client',
-                'Created At', 'Updated At',
-                'Status', ['label' => 'Actions', 'no-export' => true],
+                'ID', 'Name', 'Slug', 'Sender ID', 'Pricing Tier',
+                'Status', 'Created At', ['label' => 'Actions', 'no-export' => true],
             ]"
             striped hoverable with-buttons
             :config="[
                 'processing' => true,
                 'serverSide' => true,
-                'ajax' => route('users.index'),
+                'ajax' => route('clients.index'),
                 'lengthMenu' => [[10, 25, 50, -1], [10, 25, 50, 'All']],
                 'layout' => [
                     'topStart' => ['buttons', 'pageLength'],
@@ -83,14 +81,11 @@
                 'columns' => [
                     ['data' => 'id', 'name' => 'id'],
                     ['data' => 'name', 'name' => 'name'],
-                    ['data' => 'email', 'name' => 'email'],
-                    ['data' => 'role', 'name' => 'role', 'orderable' => false, 'searchable' => false],
-                    ['data' => 'client', 'name' => 'client', 'orderable' => false, 'searchable' => false],
-                    // ['data' => 'created_by', 'name' => 'created_by', 'orderable' => false, 'searchable' => false],
-                    ['data' => 'created_at', 'name' => 'created_at'],
-                    // ['data' => 'updated_by'  , 'name' => 'updated_by', 'orderable' => false, 'searchable' => false],
-                    ['data' => 'updated_at', 'name' => 'updated_at'],
+                    ['data' => 'slug', 'name' => 'slug'],
+                    ['data' => 'sender_id', 'name' => 'sender_id'],
+                    ['data' => 'pricing_tier', 'name' => 'pricing_tier', 'orderable' => false, 'searchable' => false],
                     ['data' => 'status', 'name' => 'status', 'orderable' => false, 'searchable' => false],
+                    ['data' => 'created_at', 'name' => 'created_at'],
                     ['data' => 'actions', 'name' => 'actions', 'orderable' => false, 'searchable' => false],
                 ],
                 'buttons' => [

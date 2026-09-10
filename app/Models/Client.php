@@ -22,6 +22,11 @@ class Client extends Model
         return $this->hasOne(Wallet::class);
     }
 
+    public function users(): HasMany
+    {
+        return $this->hasMany(User::class);
+    }
+
     public function apiKeys(): HasMany
     {
         return $this->hasMany(ApiKey::class);

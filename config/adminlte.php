@@ -812,6 +812,13 @@ return [
             'can' => 'viewAny',
             'model' => \App\Models\User::class,
         ],
+        [
+            'text' => 'Clients',
+            'url' => 'clients',
+            'icon' => 'bi bi-building',
+            'can' => 'viewAny',
+            'model' => \App\Models\Client::class,
+        ],
     ],
 
     /*
