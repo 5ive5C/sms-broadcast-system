@@ -1,11 +1,4 @@
 @extends('adminlte::page')
-
-@section('title', 'Users')
-
-@section('content_header')
-    <h1>Users</h1>
-@stop
-
 @section('content')
 
     @if(session('status'))
@@ -14,6 +7,7 @@
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
     @endif
+
 
     @if(session('error'))
         <div class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -71,7 +65,7 @@
         <x-adminlte-datatable id="users-table"
             :heads="[
                 'ID', 'Name', 'Email', 'Role', 'Client',
-                'Created By', 'Created At', 'Updated By', 'Updated At',
+                'Created At', 'Updated At',
                 'Status', ['label' => 'Actions', 'no-export' => true],
             ]"
             striped hoverable with-buttons
@@ -92,9 +86,9 @@
                     ['data' => 'email', 'name' => 'email'],
                     ['data' => 'role', 'name' => 'role', 'orderable' => false, 'searchable' => false],
                     ['data' => 'client', 'name' => 'client', 'orderable' => false, 'searchable' => false],
-                    ['data' => 'created_by', 'name' => 'created_by', 'orderable' => false, 'searchable' => false],
+                    // ['data' => 'created_by', 'name' => 'created_by', 'orderable' => false, 'searchable' => false],
                     ['data' => 'created_at', 'name' => 'created_at'],
-                    ['data' => 'updated_by', 'name' => 'updated_by', 'orderable' => false, 'searchable' => false],
+                    // ['data' => 'updated_by'  , 'name' => 'updated_by', 'orderable' => false, 'searchable' => false],
                     ['data' => 'updated_at', 'name' => 'updated_at'],
                     ['data' => 'status', 'name' => 'status', 'orderable' => false, 'searchable' => false],
                     ['data' => 'actions', 'name' => 'actions', 'orderable' => false, 'searchable' => false],

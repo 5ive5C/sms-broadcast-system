@@ -40,8 +40,8 @@ class UserController extends Controller
                 ->addColumn('client', fn (User $user) => $user->client?->name ?? 'Internal')
                 ->editColumn('created_at', fn (User $user) => $user->created_at?->format('d-M-Y H:i:s'))
                 ->editColumn('updated_at', fn (User $user) => $user->updated_at?->format('d-M-Y H:i:s'))
-                ->addColumn('created_by', fn (User $user) => $user->creator?->name ?? '—')
-                ->addColumn('updated_by', fn (User $user) => $user->editor?->name ?? '—')
+                // ->addColumn('created_by', fn (User $user) => $user->creator?->name ?? '—')
+                // ->addColumn('updated_by', fn (User $user) => $user->editor?->name ?? '—')
                 ->addColumn('status', fn (User $user) => $user->is_active
                     ? '<span class="text-success fw-semibold">Active</span>'
                     : '<span class="text-danger fw-semibold">Suspended</span>')
