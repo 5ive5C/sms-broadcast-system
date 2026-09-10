@@ -4,7 +4,7 @@
     </a>
 
     <form action="{{ route('clients.destroy', $client) }}" method="post" class="d-inline"
-        onsubmit="return confirm('Delete {{ addslashes($client->name) }}? This is only possible while it has no users.');">
+        data-confirm="Delete {{ $client->name }}? This is only possible while it has no users.">
         @csrf
         @method('DELETE')
         <button type="submit" class="btn btn-link p-0 border-0 text-danger" title="Delete">

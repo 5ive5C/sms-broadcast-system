@@ -2,9 +2,7 @@
 
 namespace App\Http\Requests;
 
-use App\Models\Client;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 
 class UpdateClientRequest extends FormRequest
 {
@@ -23,15 +21,13 @@ class UpdateClientRequest extends FormRequest
      */
     public function rules(): array
     {
-        /** @var Client $client */
-        $client = $this->route('client');
-
         return [
             'name' => ['required', 'string', 'max:255'],
-            'slug' => ['nullable', 'string', 'max:255', 'alpha_dash', Rule::unique('clients')->ignore($client->id)],
-            'sender_id' => ['nullable', 'string', 'max:255'],
-            'status' => ['required', Rule::in(['active', 'suspended', 'inactive'])],
-            'pricing_tier_id' => ['nullable', Rule::exists('pricing_tiers', 'id')],
+            'company_reg_no' => ['nullable', 'string', 'max:255'],
+            'address' => ['nullable', 'string', 'max:1000'],
+            'pic_name' => ['required', 'string', 'max:255'],
+            'pic_phone' => ['required', 'string', 'max:50'],
+            'pic_email' => ['required', 'string', 'email', 'max:255'],
         ];
     }
 }

@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreClientRequest;
 use App\Http\Requests\UpdateClientRequest;
 use App\Models\Client;
-use App\Models\PricingTier;
 use App\Models\Wallet;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
@@ -50,9 +49,7 @@ class ClientController extends Controller
      */
     public function create(): View
     {
-        return view('clients.create', [
-            'pricingTiers' => PricingTier::query()->orderBy('name')->pluck('name', 'id'),
-        ]);
+        return view('clients.create');
     }
 
     /**
@@ -61,8 +58,9 @@ class ClientController extends Controller
     public function store(StoreClientRequest $request): RedirectResponse
     {
         $client = Client::create([
-            ...$request->safe()->only(['name', 'sender_id', 'status', 'pricing_tier_id']),
-            'slug' => $request->validated('slug') ?: Str::slug($request->validated('name')),
+            ...$request->safe()->only(['name', 'company_reg_no', 'address', 'pic_name', 'pic_phone', 'pic_email']),
+            'slug' => $this->uniqueSlug($request->validated('name')),
+            'status' => 'active',
         ]);
 
         Wallet::create(['client_id' => $client->id]);
@@ -75,10 +73,7 @@ class ClientController extends Controller
      */
     public function edit(Client $client): View
     {
-        return view('clients.edit', [
-            'client' => $client,
-            'pricingTiers' => PricingTier::query()->orderBy('name')->pluck('name', 'id'),
-        ]);
+        return view('clients.edit', ['client' => $client]);
     }
 
     /**
@@ -86,10 +81,9 @@ class ClientController extends Controller
      */
     public function update(UpdateClientRequest $request, Client $client): RedirectResponse
     {
-        $client->update([
-            ...$request->safe()->only(['name', 'sender_id', 'status', 'pricing_tier_id']),
-            'slug' => $request->validated('slug') ?: Str::slug($request->validated('name')),
-        ]);
+        $client->update(
+            $request->safe()->only(['name', 'company_reg_no', 'address', 'pic_name', 'pic_phone', 'pic_email'])
+        );
 
         return redirect()->route('clients.index')->with('status', 'Client updated.');
     }
@@ -112,5 +106,24 @@ class ClientController extends Controller
         $client->delete();
 
         return redirect()->route('clients.index')->with('status', 'Client deleted.');
+    }
+
+    /**
+     * Build a unique slug from the client name, appending a numeric suffix
+     * on collision. There is no form field for it anymore, so this is the
+     * only place a slug ever gets assigned.
+     */
+    protected function uniqueSlug(string $name): string
+    {
+        $base = Str::slug($name);
+        $slug = $base;
+        $suffix = 1;
+
+        while (Client::where('slug', $slug)->exists()) {
+            $slug = "{$base}-{$suffix}";
+            $suffix++;
+        }
+
+        return $slug;
     }
 }

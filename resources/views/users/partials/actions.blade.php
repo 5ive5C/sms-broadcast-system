@@ -18,7 +18,7 @@
         </form>
 
         <form action="{{ route('users.destroy', $user) }}" method="post" class="d-inline"
-            onsubmit="return confirm('Delete {{ addslashes($user->name) }}? This cannot be undone.');">
+            data-confirm="Delete {{ $user->name }}? Their record is kept but they lose access.">
             @csrf
             @method('DELETE')
             <button type="submit" class="btn btn-link p-0 border-0 text-danger" title="Delete">

@@ -1,19 +1,7 @@
 @extends('adminlte::page')
 @section('content')
 
-    @if(session('status'))
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-            {{ session('status') }}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-    @endif
-
-    @if(session('error'))
-        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-            {{ session('error') }}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-    @endif
+    @include('partials.sweetalert')
 
     <style>
         #clients-table thead th {
@@ -42,7 +30,7 @@
         {{-- Register a custom Datatables button that just re-runs the ajax
              request, before the table below initializes and references it
              by name. --}}
-        @push('js')
+        @prepend('js')
         <script>
             window._AdminLTE_Ready(() => {
                 if (typeof window.jQuery === 'undefined' || typeof window.jQuery.fn.DataTable === 'undefined') {
@@ -59,7 +47,7 @@
                 };
             });
         </script>
-        @endpush
+        @endprepend
 
         <x-adminlte-datatable id="clients-table"
             :heads="[

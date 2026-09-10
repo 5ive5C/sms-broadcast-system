@@ -15,6 +15,11 @@ class Client extends Model
         'sender_id',
         'status',
         'pricing_tier_id',
+        'company_reg_no',
+        'address',
+        'pic_name',
+        'pic_phone',
+        'pic_email',
     ];
 
     public function wallet(): HasOne

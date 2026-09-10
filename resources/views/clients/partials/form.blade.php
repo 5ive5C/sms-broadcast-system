@@ -11,49 +11,54 @@
 </div>
 
 <div class="mb-3">
-    <label for="slug" class="form-label">
-        Slug <span class="text-body-secondary">(leave blank to auto-generate from name)</span>
-    </label>
-    <input type="text" name="slug" id="slug"
-        class="form-control @error('slug') is-invalid @enderror"
-        value="{{ old('slug', $client?->slug) }}">
-    @error('slug')
+    <label for="company_reg_no" class="form-label">Company Registration No.</label>
+    <input type="text" name="company_reg_no" id="company_reg_no"
+        class="form-control @error('company_reg_no') is-invalid @enderror"
+        value="{{ old('company_reg_no', $client?->company_reg_no) }}">
+    @error('company_reg_no')
         <div class="invalid-feedback">{{ $message }}</div>
     @enderror
 </div>
 
 <div class="mb-3">
-    <label for="sender_id" class="form-label">Sender ID</label>
-    <input type="text" name="sender_id" id="sender_id"
-        class="form-control @error('sender_id') is-invalid @enderror"
-        value="{{ old('sender_id', $client?->sender_id) }}">
-    @error('sender_id')
+    <label for="address" class="form-label">Address</label>
+    <textarea name="address" id="address" rows="3"
+        class="form-control @error('address') is-invalid @enderror">{{ old('address', $client?->address) }}</textarea>
+    @error('address')
+        <div class="invalid-feedback">{{ $message }}</div>
+    @enderror
+</div>
+
+<hr class="my-4">
+<h6 class="fw-bold mb-3">Person In Charge (PIC)</h6>
+
+<div class="mb-3">
+    <label for="pic_name" class="form-label">PIC Name <span class="text-danger">*</span></label>
+    <input type="text" name="pic_name" id="pic_name"
+        class="form-control @error('pic_name') is-invalid @enderror"
+        value="{{ old('pic_name', $client?->pic_name) }}" required>
+    @error('pic_name')
         <div class="invalid-feedback">{{ $message }}</div>
     @enderror
 </div>
 
 <div class="row">
     <div class="col-md-6 mb-3">
-        <label for="status" class="form-label">Status</label>
-        <select name="status" id="status" class="form-select @error('status') is-invalid @enderror">
-            @foreach(['active' => 'Active', 'suspended' => 'Suspended', 'inactive' => 'Inactive'] as $value => $label)
-                <option value="{{ $value }}" @selected(old('status', $client?->status ?? 'active') === $value)>{{ $label }}</option>
-            @endforeach
-        </select>
-        @error('status')
+        <label for="pic_phone" class="form-label">PIC Phone No. <span class="text-danger">*</span></label>
+        <input type="text" name="pic_phone" id="pic_phone"
+            class="form-control @error('pic_phone') is-invalid @enderror"
+            value="{{ old('pic_phone', $client?->pic_phone) }}" required>
+        @error('pic_phone')
             <div class="invalid-feedback">{{ $message }}</div>
         @enderror
     </div>
 
     <div class="col-md-6 mb-3">
-        <label for="pricing_tier_id" class="form-label">Pricing Tier</label>
-        <select name="pricing_tier_id" id="pricing_tier_id" class="form-select @error('pricing_tier_id') is-invalid @enderror">
-            <option value="">None</option>
-            @foreach($pricingTiers as $id => $name)
-                <option value="{{ $id }}" @selected((int) old('pricing_tier_id', $client?->pricing_tier_id) === $id)>{{ $name }}</option>
-            @endforeach
-        </select>
-        @error('pricing_tier_id')
+        <label for="pic_email" class="form-label">PIC Email <span class="text-danger">*</span></label>
+        <input type="email" name="pic_email" id="pic_email"
+            class="form-control @error('pic_email') is-invalid @enderror"
+            value="{{ old('pic_email', $client?->pic_email) }}" required>
+        @error('pic_email')
             <div class="invalid-feedback">{{ $message }}</div>
         @enderror
     </div>
