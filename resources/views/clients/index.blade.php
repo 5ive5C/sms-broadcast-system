@@ -51,7 +51,7 @@
 
         <x-adminlte-datatable id="clients-table"
             :heads="[
-                'ID', 'Name', 'Slug', 'Sender ID', 'Pricing Tier',
+                'ID', 'Company Name', 'Slug', 'Sender ID', 'Pricing Tier',
                 'Status', 'Created At', ['label' => 'Actions', 'no-export' => true],
             ]"
             striped hoverable with-buttons

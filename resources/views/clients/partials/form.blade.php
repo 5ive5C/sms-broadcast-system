@@ -1,10 +1,10 @@
 @php($client = $client ?? null)
 
 <div class="mb-3">
-    <label for="name" class="form-label">Name</label>
+    <label for="name" class="form-label">Company Name <span class="text-danger">*</span></label>
     <input type="text" name="name" id="name"
         class="form-control @error('name') is-invalid @enderror"
-        value="{{ old('name', $client?->name) }}" autofocus>
+        value="{{ old('name', $client?->name) }}" autofocus required>
     @error('name')
         <div class="invalid-feedback">{{ $message }}</div>
     @enderror
