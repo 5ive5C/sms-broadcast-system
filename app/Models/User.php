@@ -51,4 +51,19 @@ class User extends Authenticatable
     {
         return $this->role?->hasPermission($permission) ?? false;
     }
+
+    public function isSuperAdmin(): bool
+    {
+        return $this->role?->slug === 'super-admin';
+    }
+
+    public function isClientAdmin(): bool
+    {
+        return $this->role?->slug === 'client-admin';
+    }
+
+    public function canManageUsers(): bool
+    {
+        return $this->isSuperAdmin() || $this->isClientAdmin();
+    }
 }

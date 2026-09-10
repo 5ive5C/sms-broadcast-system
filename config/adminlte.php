@@ -805,6 +805,13 @@ return [
             'url' => 'home',
             'icon' => 'bi bi-speedometer2',
         ],
+        [
+            'text' => 'Users',
+            'url' => 'users',
+            'icon' => 'bi bi-people',
+            'can' => 'viewAny',
+            'model' => \App\Models\User::class,
+        ],
     ],
 
     /*
@@ -842,8 +849,22 @@ return [
     */
 
     'plugins' => [
+        // The Datatables plugin (jQuery based) needs jQuery itself, which
+        // AdminLTE v4 no longer bundles by default (its own JS is jQuery
+        // free). Load it first so it's available when Datatables inits.
+
+        'jQuery' => [
+            'active' => true,
+            'files' => [
+                [
+                    'type' => 'js',
+                    'asset' => false,
+                    'location' => '//cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js',
+                ],
+            ],
+        ],
         'Datatables' => [
-            'active' => false,
+            'active' => true,
             'files' => [
                 [
                     'type' => 'js',
@@ -867,7 +888,7 @@ return [
         // and pdfmake the pdf one, drop them when you don't need those.
 
         'DatatablesButtons' => [
-            'active' => false,
+            'active' => true,
             'files' => [
                 [
                     'type' => 'js',
