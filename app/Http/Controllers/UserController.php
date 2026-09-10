@@ -28,7 +28,7 @@ class UserController extends Controller
     {
         $actor = $request->user();
 
-        $users = User::query()->with(['role', 'client']);
+        $users = User::query()->with(['role', 'client', 'creator', 'editor']);
 
         if (! $actor->isSuperAdmin()) {
             $users->where('client_id', $actor->client_id);
@@ -38,8 +38,18 @@ class UserController extends Controller
             return DataTables::of($users)
                 ->addColumn('role', fn (User $user) => $user->role?->name ?? '—')
                 ->addColumn('client', fn (User $user) => $user->client?->name ?? 'Internal')
-                ->addColumn('actions', fn (User $user) => view('users.partials.actions', ['user' => $user])->render())
-                ->rawColumns(['actions'])
+                ->editColumn('created_at', fn (User $user) => $user->created_at?->format('d-M-Y H:i:s'))
+                ->editColumn('updated_at', fn (User $user) => $user->updated_at?->format('d-M-Y H:i:s'))
+                ->addColumn('created_by', fn (User $user) => $user->creator?->name ?? '—')
+                ->addColumn('updated_by', fn (User $user) => $user->editor?->name ?? '—')
+                ->addColumn('status', fn (User $user) => $user->is_active
+                    ? '<span class="text-success fw-semibold">Active</span>'
+                    : '<span class="text-danger fw-semibold">Suspended</span>')
+                ->addColumn('actions', fn (User $user) => view('users.partials.actions', [
+                    'user' => $user,
+                    'canManage' => $actor->can('update', $user),
+                ])->render())
+                ->rawColumns(['status', 'actions'])
                 ->toJson();
         }
 
@@ -62,6 +72,7 @@ class UserController extends Controller
         User::create([
             ...$request->safe()->only(['name', 'email', 'client_id', 'role_id']),
             'password' => Hash::make($request->validated('password')),
+            'created_by' => $request->user()->id,
         ]);
 
         return redirect()->route('users.index')->with('status', 'User created.');
@@ -89,6 +100,7 @@ class UserController extends Controller
             $user->password = Hash::make($password);
         }
 
+        $user->updated_by = $request->user()->id;
         $user->save();
 
         return redirect()->route('users.index')->with('status', 'User updated.');
@@ -106,6 +118,27 @@ class UserController extends Controller
         $user->delete();
 
         return redirect()->route('users.index')->with('status', 'User deleted.');
+    }
+
+    /**
+     * Toggle the active/suspended status of the specified resource. Uses the
+     * same "manage" boundary as update (tenant scope, no touching another
+     * super-admin), plus a guard against locking yourself out.
+     */
+    public function toggleStatus(Request $request, User $user): RedirectResponse
+    {
+        $this->authorize('update', $user);
+
+        if ($user->id === $request->user()->id) {
+            return redirect()->route('users.index')->with('error', "Can't suspend your own account.");
+        }
+
+        $user->forceFill([
+            'is_active' => ! $user->is_active,
+            'updated_by' => $request->user()->id,
+        ])->save();
+
+        return redirect()->route('users.index')->with('status', $user->is_active ? 'User activated.' : 'User suspended.');
     }
 
     /**

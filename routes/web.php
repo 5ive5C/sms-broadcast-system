@@ -13,4 +13,5 @@ Route::middleware('auth')->group(function () {
     })->name('home');
 
     Route::resource('users', UserController::class)->except('show');
+    Route::patch('users/{user}/toggle-status', [UserController::class, 'toggleStatus'])->name('users.toggle-status');
 });

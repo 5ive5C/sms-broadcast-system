@@ -869,17 +869,17 @@ return [
                 [
                     'type' => 'js',
                     'asset' => false,
-                    'location' => '//cdn.datatables.net/2.1.8/js/dataTables.min.js',
+                    'location' => '//cdn.datatables.net/3.0.3/js/dataTables.min.js',
                 ],
                 [
                     'type' => 'js',
                     'asset' => false,
-                    'location' => '//cdn.datatables.net/2.1.8/js/dataTables.bootstrap5.min.js',
+                    'location' => '//cdn.datatables.net/3.0.3/js/dataTables.bootstrap5.min.js',
                 ],
                 [
                     'type' => 'css',
                     'asset' => false,
-                    'location' => '//cdn.datatables.net/2.1.8/css/dataTables.bootstrap5.min.css',
+                    'location' => '//cdn.datatables.net/3.0.3/css/dataTables.bootstrap5.min.css',
                 ],
             ],
         ],
