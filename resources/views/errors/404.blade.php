@@ -1,0 +1,1 @@
+@extends('adminlte::errors.404')
