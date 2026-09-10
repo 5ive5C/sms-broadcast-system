@@ -28,7 +28,7 @@ return [
     |
     */
 
-    'passwords' => 'portal_users',
+    'passwords' => 'users',
 
     /*
     |--------------------------------------------------------------------------
@@ -162,7 +162,6 @@ return [
     */
 
     'features' => [
-        Features::registration(),
         Features::resetPasswords(),
         // Features::emailVerification(),
         Features::updateProfileInformation(),

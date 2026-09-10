@@ -198,7 +198,7 @@ return [
 
     'logout_method' => null,
     'login_url' => 'login',
-    'register_url' => 'register',
+    'register_url' => null,
     'password_reset_url' => 'password/reset',
     'password_email_url' => 'password/email',
     'profile_url' => false,
@@ -293,7 +293,7 @@ return [
             'bootstrap_icons_css' => 'vendor/bootstrap-icons/font/bootstrap-icons.min.css',
             'overlayscrollbars_css' => 'vendor/overlayscrollbars/styles/overlayscrollbars.min.css',
             'overlayscrollbars_js' => 'vendor/overlayscrollbars/browser/overlayscrollbars.browser.es6.min.js',
-            'fonts_css' => 'vendor/fonts/source-sans-3/index.css',
+            'fonts_css' => 'vendor/fonts/inter/index.css',
         ],
 
         // Locations used on the 'cdn' mode and as fallback of missing assets.
@@ -310,7 +310,7 @@ return [
             'bootstrap_icons_css' => 'https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css',
             'overlayscrollbars_css' => 'https://cdn.jsdelivr.net/npm/overlayscrollbars@2.11.0/styles/overlayscrollbars.min.css',
             'overlayscrollbars_js' => 'https://cdn.jsdelivr.net/npm/overlayscrollbars@2.11.0/browser/overlayscrollbars.browser.es6.min.js',
-            'fonts_css' => 'https://cdn.jsdelivr.net/npm/@fontsource/source-sans-3@5.0.12/index.css',
+            'fonts_css' => 'https://cdn.jsdelivr.net/npm/@fontsource/inter@5.3.0/index.css',
         ],
     ],
 
@@ -660,7 +660,24 @@ return [
     // The custom properties applied on the whole document. For example:
     // 'css_variables' => ['--bs-primary' => '#6f42c1'],
 
-    'css_variables' => [],
+    'css_variables' => [
+        '--bs-primary' => '#2563EB',
+        '--bs-primary-rgb' => '37, 99, 235',
+        '--bs-link-color' => '#2563EB',
+        '--bs-link-color-rgb' => '37, 99, 235',
+        '--bs-link-hover-color' => '#1D4ED8',
+        '--bs-success' => '#10B981',
+        '--bs-success-rgb' => '16, 185, 129',
+        '--bs-warning' => '#F59E0B',
+        '--bs-warning-rgb' => '245, 158, 11',
+        '--bs-danger' => '#EF4444',
+        '--bs-danger-rgb' => '239, 68, 68',
+        '--bs-body-bg' => '#F8FAFC',
+        '--bs-tertiary-bg' => '#F8FAFC',
+        '--bs-card-bg' => '#FFFFFF',
+        '--bs-body-color' => '#334155',
+        '--bs-font-sans-serif' => '"Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif',
+    ],
 
     // The selector of the block above. Only ':root' and 'body' are accepted,
     // any other value falls back to ':root'.
@@ -672,7 +689,10 @@ return [
     // are emitted with a matching specificity. For example:
     // 'css_variables_sidebar' => ['--lte-sidebar-bg' => '#1f2d3d'],
 
-    'css_variables_sidebar' => [],
+    'css_variables_sidebar' => [
+        '--bs-secondary-bg' => '#0F172A',
+        '--bs-dark' => '#0F172A',
+    ],
 
     /*
     |--------------------------------------------------------------------------
@@ -781,81 +801,9 @@ return [
             'text' => 'search',
         ],
         [
-            'text' => 'blog',
-            'url' => 'admin/blog',
-            'can' => 'manage-blog',
-        ],
-        [
-            'text' => 'pages',
-            'url' => 'admin/pages',
-            'icon' => 'bi bi-file-earmark',
-            'label' => 4,
-            'label_color' => 'success',
-        ],
-        ['header' => 'account_settings'],
-        [
-            'text' => 'profile',
-            'url' => 'admin/settings',
-            'icon' => 'bi bi-person',
-        ],
-        [
-            'text' => 'change_password',
-            'url' => 'admin/settings',
-            'icon' => 'bi bi-lock',
-        ],
-        [
-            'text' => 'multilevel',
-            'icon' => 'bi bi-share',
-            'submenu' => [
-                [
-                    'text' => 'level_one',
-                    'url' => '#',
-                ],
-                [
-                    'text' => 'level_one',
-                    'url' => '#',
-                    'submenu' => [
-                        [
-                            'text' => 'level_two',
-                            'url' => '#',
-                        ],
-                        [
-                            'text' => 'level_two',
-                            'url' => '#',
-                            'submenu' => [
-                                [
-                                    'text' => 'level_three',
-                                    'url' => '#',
-                                ],
-                                [
-                                    'text' => 'level_three',
-                                    'url' => '#',
-                                ],
-                            ],
-                        ],
-                    ],
-                ],
-                [
-                    'text' => 'level_one',
-                    'url' => '#',
-                ],
-            ],
-        ],
-        ['header' => 'labels'],
-        [
-            'text' => 'important',
-            'icon_color' => 'danger',
-            'url' => '#',
-        ],
-        [
-            'text' => 'warning',
-            'icon_color' => 'warning',
-            'url' => '#',
-        ],
-        [
-            'text' => 'information',
-            'icon_color' => 'info',
-            'url' => '#',
+            'text' => 'Dashboard',
+            'url' => 'home',
+            'icon' => 'bi bi-speedometer2',
         ],
     ],
 

@@ -11,9 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::rename('users', 'portal_users');
-
-        Schema::table('portal_users', function (Blueprint $table) {
+        Schema::table('users', function (Blueprint $table) {
             $table->foreignId('client_id')->nullable()->after('id')->constrained()->cascadeOnDelete();
             $table->foreignId('role_id')->nullable()->after('client_id')->constrained()->nullOnDelete();
         });
@@ -24,11 +22,9 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('portal_users', function (Blueprint $table) {
+        Schema::table('users', function (Blueprint $table) {
             $table->dropConstrainedForeignId('client_id');
             $table->dropConstrainedForeignId('role_id');
         });
-
-        Schema::rename('portal_users', 'users');
     }
 };

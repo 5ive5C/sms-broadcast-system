@@ -39,7 +39,7 @@ class TopUpRequest extends Model
 
     public function approver(): BelongsTo
     {
-        return $this->belongsTo(PortalUser::class, 'approved_by');
+        return $this->belongsTo(User::class, 'approved_by');
     }
 
     public function scopePending(Builder $query): Builder
@@ -55,7 +55,7 @@ class TopUpRequest extends Model
     /**
      * Approve the top-up and credit the client's wallet atomically.
      */
-    public function approve(PortalUser $admin): void
+    public function approve(User $admin): void
     {
         DB::transaction(function () use ($admin) {
             $wallet = Wallet::where('client_id', $this->client_id)->lockForUpdate()->firstOrFail();
@@ -69,7 +69,7 @@ class TopUpRequest extends Model
         });
     }
 
-    public function reject(PortalUser $admin, ?string $notes = null): void
+    public function reject(User $admin, ?string $notes = null): void
     {
         $this->forceFill([
             'status' => 'rejected',

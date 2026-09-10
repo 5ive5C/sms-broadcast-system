@@ -25,9 +25,9 @@ class Role extends Model
         return $this->belongsTo(Client::class);
     }
 
-    public function portalUsers(): HasMany
+    public function users(): HasMany
     {
-        return $this->hasMany(PortalUser::class);
+        return $this->hasMany(User::class);
     }
 
     public function scopeGlobal(Builder $query): Builder
