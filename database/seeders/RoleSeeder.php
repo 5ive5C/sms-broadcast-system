@@ -19,19 +19,15 @@ class RoleSeeder extends Seeder
 
         Role::query()->updateOrCreate(
             ['client_id' => null, 'slug' => 'client-admin'],
-            ['name' => 'Client Admin', 'permissions' => [
-                'campaigns.manage',
-                'api-keys.manage',
-                'users.manage',
-                'top-ups.request',
-                'reports.view',
-            ]],
+            ['name' => 'Client Admin', 'permissions' => array_keys(Role::PERMISSIONS)],
         );
 
         Role::query()->updateOrCreate(
             ['client_id' => null, 'slug' => 'client-staff'],
             ['name' => 'Client Staff', 'permissions' => [
                 'campaigns.manage',
+                'recipients.upload',
+                'quick-send.manage',
                 'reports.view',
             ]],
         );

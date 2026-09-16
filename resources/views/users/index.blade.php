@@ -5,15 +5,11 @@
 
     <style>
         #users-table thead th {
-            background-color: var(--bs-primary);
-            color: #fff;
-            --dt-order-arrow_color: rgba(255, 255, 255, 0.5);
-            --dt-order-arrow_color-current: #fff;
+            background-color: var(--bs-tertiary-bg);
         }
         #users-table thead th.dt-orderable-asc:hover,
         #users-table thead th.dt-orderable-desc:hover {
-            background-color: var(--bs-primary);
-            color: #fff;
+            background-color: var(--bs-secondary-bg);
         }
     </style>
 
@@ -81,10 +77,10 @@
                     ['data' => 'actions', 'name' => 'actions', 'orderable' => false, 'searchable' => false],
                 ],
                 'buttons' => [
-                    ['extend' => 'excel', 'className' => 'btn-success', 'text' => '<i class=\'bi bi-file-earmark-excel\'></i>', 'titleAttr' => 'Excel', 'exportOptions' => ['columns' => ':not([dt-no-export])']],
-                    ['extend' => 'csv', 'className' => 'btn-primary', 'text' => '<i class=\'bi bi-filetype-csv\'></i>', 'titleAttr' => 'CSV', 'exportOptions' => ['columns' => ':not([dt-no-export])']],
-                    ['extend' => 'pdf', 'className' => 'btn-danger', 'text' => '<i class=\'bi bi-file-earmark-pdf\'></i>', 'titleAttr' => 'PDF', 'exportOptions' => ['columns' => ':not([dt-no-export])']],
-                    ['extend' => 'print', 'className' => 'btn-dark', 'text' => '<i class=\'bi bi-printer\'></i>', 'titleAttr' => 'Print', 'exportOptions' => ['columns' => ':not([dt-no-export])']],
+                    ['extend' => 'excel', 'className' => 'btn-outline-secondary', 'text' => '<i class=\'bi bi-file-earmark-excel\'></i>', 'titleAttr' => 'Excel', 'exportOptions' => ['columns' => ':not([dt-no-export])']],
+                    ['extend' => 'csv', 'className' => 'btn-outline-secondary', 'text' => '<i class=\'bi bi-filetype-csv\'></i>', 'titleAttr' => 'CSV', 'exportOptions' => ['columns' => ':not([dt-no-export])']],
+                    ['extend' => 'pdf', 'className' => 'btn-outline-secondary', 'text' => '<i class=\'bi bi-file-earmark-pdf\'></i>', 'titleAttr' => 'PDF', 'exportOptions' => ['columns' => ':not([dt-no-export])']],
+                    ['extend' => 'print', 'className' => 'btn-outline-secondary', 'text' => '<i class=\'bi bi-printer\'></i>', 'titleAttr' => 'Print', 'exportOptions' => ['columns' => ':not([dt-no-export])']],
                     ['extend' => 'reload'],
                 ],
             ]" />

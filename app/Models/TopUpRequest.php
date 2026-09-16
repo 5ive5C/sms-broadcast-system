@@ -15,6 +15,7 @@ class TopUpRequest extends Model
         'credits',
         'price_per_credit',
         'total_amount',
+        'slip_path',
         'status',
         'approved_by',
         'approved_at',
@@ -53,20 +54,53 @@ class TopUpRequest extends Model
     }
 
     /**
-     * Approve the top-up and credit the client's wallet atomically.
+     * Approve the top-up: credits the wallet, posts a ledger entry and an
+     * invoice, and records the approval, all atomically.
      */
     public function approve(User $admin): void
     {
         DB::transaction(function () use ($admin) {
             $wallet = Wallet::where('client_id', $this->client_id)->lockForUpdate()->firstOrFail();
-            $wallet->increment('balance', $this->credits);
+
+            WalletLedgerEntry::post(
+                $wallet,
+                'topup',
+                'Top-up approved — '.$this->reference(),
+                (float) $this->credits,
+                $this,
+            );
 
             $this->forceFill([
                 'status' => 'approved',
                 'approved_by' => $admin->id,
                 'approved_at' => now(),
             ])->save();
+
+            Invoice::create([
+                'client_id' => $this->client_id,
+                'top_up_request_id' => $this->id,
+                'invoice_no' => Invoice::nextInvoiceNo(),
+                'invoice_date' => now()->toDateString(),
+                'credits' => $this->credits,
+                'price_per_credit' => $this->price_per_credit,
+                'amount' => $this->total_amount,
+                'sst' => 0,
+                'total' => $this->total_amount,
+                'status' => 'unpaid',
+            ]);
         });
+
+        AuditLog::record($admin, 'Top-up approved', $this->reference().' · +'.number_format($this->credits).' credits', $this->client);
+    }
+
+    /**
+     * Deterministic reference string, used before persistence-driven IDs
+     * are meaningful to a human (matches the TOP-YYYY-NNNN shown on the
+     * slides).
+     */
+    public function reference(): string
+    {
+        return 'TOP-'.$this->created_at?->format('Y').'-'.str_pad((string) $this->id, 4, '0', STR_PAD_LEFT);
     }
 
     public function reject(User $admin, ?string $notes = null): void
@@ -77,5 +111,7 @@ class TopUpRequest extends Model
             'approved_at' => now(),
             'notes' => $notes ?? $this->notes,
         ])->save();
+
+        AuditLog::record($admin, 'Top-up rejected', $this->reference(), $this->client);
     }
 }

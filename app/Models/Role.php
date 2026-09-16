@@ -9,6 +9,23 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Role extends Model
 {
+    /**
+     * The full permission catalogue offered on the role editor (Screen 06).
+     * '*' (super-admin) is deliberately excluded — it's granted directly,
+     * never picked from this checklist.
+     */
+    const PERMISSIONS = [
+        'campaigns.manage' => 'Launch campaigns',
+        'recipients.upload' => 'Upload recipient lists',
+        'quick-send.manage' => 'Quick send',
+        'reports.view' => 'View reports',
+        'api-keys.manage' => 'Manage API keys',
+        'templates.manage' => 'Manage templates',
+        'top-ups.request' => 'Request top-ups',
+        'wallet.manage' => 'Manage wallet',
+        'users.manage' => 'Manage users',
+    ];
+
     protected $fillable = [
         'client_id',
         'name',
@@ -37,6 +54,8 @@ class Role extends Model
 
     public function hasPermission(string $permission): bool
     {
-        return in_array($permission, $this->permissions ?? [], true);
+        $permissions = $this->permissions ?? [];
+
+        return in_array('*', $permissions, true) || in_array($permission, $permissions, true);
     }
 }

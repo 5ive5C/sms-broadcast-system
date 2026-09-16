@@ -8,7 +8,7 @@
 
 @section('content')
 
-    <x-adminlte-card title="Edit Client" theme="primary" icon="bi bi-building-gear">
+    <x-adminlte-card title="Edit Client" icon="bi bi-building-gear">
         <form action="{{ route('clients.update', $client) }}" method="post">
             @csrf
             @method('PUT')

@@ -60,6 +60,23 @@ class User extends Authenticatable
         return $this->client_id === null;
     }
 
+    /**
+     * The tenant whose data client-portal screens should show. For a
+     * client user that's always their own client; an internal admin has
+     * no client of their own, so it's whichever one they've picked via the
+     * "View as" switcher (session-backed, not persisted).
+     */
+    public function actingClient(): ?Client
+    {
+        if (! $this->isInternalAdmin()) {
+            return $this->client;
+        }
+
+        $id = session('viewing_client_id');
+
+        return $id ? Client::find($id) : null;
+    }
+
     public function hasPermission(string $permission): bool
     {
         return $this->role?->hasPermission($permission) ?? false;

@@ -1,4 +1,8 @@
 <div class="d-flex align-items-center gap-2">
+    <a href="{{ route('admin.view-as', $client) }}" class="text-secondary" title="View as this client">
+        <i class="bi bi-eye fs-5"></i>
+    </a>
+
     <a href="{{ route('clients.edit', $client) }}" class="text-primary" title="Edit">
         <i class="bi bi-pencil-square fs-5"></i>
     </a>

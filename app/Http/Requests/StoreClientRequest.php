@@ -26,9 +26,16 @@ class StoreClientRequest extends FormRequest
             'name' => ['required', 'string', 'max:255'],
             'company_reg_no' => ['nullable', 'string', 'max:255'],
             'address' => ['nullable', 'string', 'max:1000'],
+            'industry' => ['nullable', 'string', 'max:255'],
+            'pricing_tier_id' => ['nullable', 'exists:pricing_tiers,id'],
+            'message_types' => ['nullable', 'array'],
+            'message_types.*' => ['string', 'in:tac,transactional,bulk'],
+            'two_factor_required' => ['nullable', 'boolean'],
             'pic_name' => ['required', 'string', 'max:255'],
             'pic_phone' => ['required', 'string', 'max:50'],
             'pic_email' => ['required', 'string', 'email', 'max:255'],
+            'admin_name' => ['required', 'string', 'max:255'],
+            'admin_email' => ['required', 'string', 'email', 'max:255', 'unique:users,email'],
         ];
     }
 }

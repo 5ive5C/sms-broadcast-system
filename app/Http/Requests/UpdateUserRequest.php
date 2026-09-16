@@ -37,7 +37,9 @@ class UpdateUserRequest extends FormRequest
                 : ['required', Rule::in([$actor->client_id])],
             'role_id' => $actor->isSuperAdmin()
                 ? ['nullable', Rule::exists('roles', 'id')]
-                : ['nullable', Rule::exists('roles', 'id')->where(fn ($q) => $q->where('slug', '!=', 'super-admin'))],
+                : ['nullable', Rule::exists('roles', 'id')->where(fn ($q) => $q
+                    ->where('slug', '!=', 'super-admin')
+                    ->where(fn ($q) => $q->whereNull('client_id')->orWhere('client_id', $actor->client_id)))],
         ];
     }
 }

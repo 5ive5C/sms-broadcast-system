@@ -160,7 +160,11 @@ class UserController extends Controller
 
         return [
             'clients' => Client::query()->whereKey($actor->client_id)->pluck('name', 'id'),
-            'roles' => Role::query()->where('slug', '!=', 'super-admin')->orderBy('name')->pluck('name', 'id'),
+            'roles' => Role::query()
+                ->where('slug', '!=', 'super-admin')
+                ->where(fn ($q) => $q->whereNull('client_id')->orWhere('client_id', $actor->client_id))
+                ->orderBy('name')
+                ->pluck('name', 'id'),
             'lockClient' => true,
         ];
     }

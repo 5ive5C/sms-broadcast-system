@@ -8,7 +8,7 @@
 
 @section('content')
 
-    <x-adminlte-card title="New Client" theme="primary" icon="bi bi-building-add">
+    <x-adminlte-card title="New Client" icon="bi bi-building-add">
         <form action="{{ route('clients.store') }}" method="post">
             @csrf
             @include('clients.partials.form')

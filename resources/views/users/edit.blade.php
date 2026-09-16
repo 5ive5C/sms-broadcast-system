@@ -8,7 +8,7 @@
 
 @section('content')
 
-    <x-adminlte-card title="Edit User" theme="primary" icon="bi bi-person-gear">
+    <x-adminlte-card title="Edit User" icon="bi bi-person-gear">
         <form action="{{ route('users.update', $user) }}" method="post">
             @csrf
             @method('PUT')

@@ -800,24 +800,122 @@ return [
             'type' => 'sidebar-menu-search',
             'text' => 'search',
         ],
+
+        // Internal "SMS Broadcast" admin portal.
         [
             'text' => 'Dashboard',
-            'url' => 'home',
+            'url' => 'admin/dashboard',
             'icon' => 'bi bi-speedometer2',
+            'can' => 'internal-portal',
         ],
         [
-            'text' => 'Users',
-            'url' => 'users',
-            'icon' => 'bi bi-people',
-            'can' => 'viewAny',
-            'model' => \App\Models\User::class,
+            'text' => 'Exit "View as" client',
+            'url' => 'admin/view-as/exit',
+            'icon' => 'bi bi-box-arrow-left',
+            'can' => 'viewing-as-client',
         ],
         [
             'text' => 'Clients',
-            'url' => 'clients',
+            'url' => 'admin/clients',
             'icon' => 'bi bi-building',
+            'can' => 'internal-portal',
+        ],
+        [
+            'text' => 'Top-up approvals',
+            'url' => 'admin/top-ups',
+            'icon' => 'bi bi-cash-coin',
+            'can' => 'internal-portal',
+        ],
+        [
+            'text' => 'Pricing tiers',
+            'url' => 'admin/pricing',
+            'icon' => 'bi bi-tags',
+            'can' => 'internal-portal',
+        ],
+        [
+            'text' => 'Queue monitor',
+            'url' => 'admin/queue',
+            'icon' => 'bi bi-hdd-stack',
+            'can' => 'internal-portal',
+        ],
+        [
+            'text' => 'Reconciliation',
+            'url' => 'admin/reconciliation',
+            'icon' => 'bi bi-arrow-left-right',
+            'can' => 'internal-portal',
+        ],
+        [
+            'text' => 'Audit log',
+            'url' => 'admin/audit',
+            'icon' => 'bi bi-journal-text',
+            'can' => 'internal-portal',
+        ],
+
+        // Client portal. Visible to everyone — an internal admin lands on
+        // the "pick a client" prompt until they use View as on one.
+        [
+            'text' => 'Client Dashboard',
+            'url' => 'dashboard',
+            'icon' => 'bi bi-speedometer2',
+        ],
+        [
+            'text' => 'Quick send',
+            'url' => 'quick-send',
+            'icon' => 'bi bi-send',
+            'can' => 'quick-send.manage',
+        ],
+        [
+            'text' => 'Campaigns',
+            'icon' => 'bi bi-megaphone',
+            'can' => 'campaigns.manage',
+            'submenu' => [
+                ['text' => 'All campaigns', 'url' => 'campaigns', 'icon' => 'bi bi-circle'],
+                ['text' => 'New campaign', 'url' => 'campaigns/new', 'icon' => 'bi bi-circle'],
+                ['text' => 'Templates', 'url' => 'campaigns/templates', 'icon' => 'bi bi-circle'],
+            ],
+        ],
+        [
+            'text' => 'Messages',
+            'icon' => 'bi bi-chat-dots',
+            'can' => 'reports.view',
+            'submenu' => [
+                ['text' => 'Message log', 'url' => 'messages', 'icon' => 'bi bi-circle'],
+                ['text' => 'Failed & resend', 'url' => 'messages/failed', 'icon' => 'bi bi-circle'],
+            ],
+        ],
+        [
+            'text' => 'Wallet',
+            'icon' => 'bi bi-wallet2',
+            'submenu' => [
+                ['text' => 'Ledger', 'url' => 'wallet', 'icon' => 'bi bi-circle'],
+                ['text' => 'Request top-up', 'url' => 'wallet/top-up', 'icon' => 'bi bi-circle', 'can' => 'top-ups.request'],
+                ['text' => 'Invoices', 'url' => 'wallet/invoices', 'icon' => 'bi bi-circle'],
+            ],
+        ],
+        [
+            'text' => 'Reports',
+            'icon' => 'bi bi-bar-chart',
+            'can' => 'reports.view',
+            'submenu' => [
+                ['text' => 'Delivery report', 'url' => 'reports/delivery', 'icon' => 'bi bi-circle'],
+                ['text' => 'Usage and cost', 'url' => 'reports/usage', 'icon' => 'bi bi-circle'],
+            ],
+        ],
+        [
+            'text' => 'Users',
+            'icon' => 'bi bi-people',
             'can' => 'viewAny',
-            'model' => \App\Models\Client::class,
+            'model' => \App\Models\User::class,
+            'submenu' => [
+                ['text' => 'All users', 'url' => 'users', 'icon' => 'bi bi-circle'],
+                ['text' => 'Staff and roles', 'url' => 'roles', 'icon' => 'bi bi-circle', 'can' => 'users.manage'],
+            ],
+        ],
+        [
+            'text' => 'API Keys',
+            'url' => 'settings/api-keys',
+            'icon' => 'bi bi-gear',
+            'can' => 'api-keys.manage',
         ],
     ],
 

@@ -11,19 +11,19 @@
     {{-- Stat cards --}}
     <div class="row">
         <div class="col-lg-3 col-6">
-            <x-adminlte-small-box theme="primary" title="1,204" text="Messages Sent Today"
+            <x-adminlte-small-box title="1,204" text="Messages Sent Today"
                 icon="bi bi-send" url="#" url-text="View report" />
         </div>
         <div class="col-lg-3 col-6">
-            <x-adminlte-small-box theme="success" title="98.4%" text="Delivery Rate"
+            <x-adminlte-small-box title="98.4%" text="Delivery Rate"
                 icon="bi bi-check-circle" url="#" url-text="View report" />
         </div>
         <div class="col-lg-3 col-6">
-            <x-adminlte-small-box theme="warning" title="12" text="Pending Top-Ups"
+            <x-adminlte-small-box title="12" text="Pending Top-Ups"
                 icon="bi bi-hourglass-split" url="#" url-text="Review queue" />
         </div>
         <div class="col-lg-3 col-6">
-            <x-adminlte-small-box theme="danger" title="3" text="Failed Campaigns"
+            <x-adminlte-small-box title="3" text="Failed Campaigns"
                 icon="bi bi-exclamation-triangle" url="#" url-text="Investigate" />
         </div>
     </div>
@@ -31,7 +31,7 @@
     <div class="row">
         {{-- Recent campaigns table --}}
         <div class="col-lg-8">
-            <x-adminlte-card title="Recent Campaigns" theme="primary" icon="bi bi-megaphone" collapsible>
+            <x-adminlte-card title="Recent Campaigns" icon="bi bi-megaphone" collapsible>
                 <div class="table-responsive">
                     <table class="table table-hover align-middle mb-0">
                         <thead>
@@ -75,18 +75,18 @@
 
         {{-- Wallet / balance --}}
         <div class="col-lg-4">
-            <x-adminlte-card title="Wallet Balance" theme="light" icon="bi bi-wallet2">
+            <x-adminlte-card title="Wallet Balance" icon="bi bi-wallet2">
                 <h2 class="mb-1" style="color: var(--bs-primary);">RM 12,450.00</h2>
                 <p class="text-body-secondary mb-3">Demo Client &middot; Standard Tier</p>
 
-                <x-adminlte-progress-group label="Credits used" :value="68" :max="100" theme="primary" />
-                <x-adminlte-progress-group label="Delivery success" :value="98" :max="100" theme="success" />
-                <x-adminlte-progress-group label="Retry backlog" :value="24" :max="100" theme="warning" />
+                <x-adminlte-progress-group label="Credits used" :value="68" :max="100" />
+                <x-adminlte-progress-group label="Delivery success" :value="98" :max="100" />
+                <x-adminlte-progress-group label="Retry backlog" :value="24" :max="100" />
 
                 <button type="button" class="btn btn-primary w-100 mt-2">Request Top-Up</button>
             </x-adminlte-card>
 
-            <x-adminlte-card title="Buttons &amp; Badges" theme="light">
+            <x-adminlte-card title="Buttons &amp; Badges">
                 <div class="d-flex flex-wrap gap-2 mb-3">
                     <button type="button" class="btn btn-primary">Primary</button>
                     <button type="button" class="btn btn-success">Success</button>
