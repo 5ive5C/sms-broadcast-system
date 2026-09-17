@@ -26,11 +26,15 @@ class Message extends Model
         'failure_reason',
         'isms_status',
         'submitted_at',
+        'scheduled_for',
+        'queued_at',
         'final_at',
     ];
 
     protected $casts = [
         'submitted_at' => 'datetime',
+        'scheduled_for' => 'datetime',
+        'queued_at' => 'datetime',
         'final_at' => 'datetime',
     ];
 
@@ -64,6 +68,17 @@ class Message extends Model
     public function scopeFailed(Builder $query): Builder
     {
         return $query->where('status', 'failed');
+    }
+
+    /**
+     * Rows inserted (by the portal or the API) but not yet handed to the
+     * gateway job — what the dispatch-pending poller claims.
+     */
+    public function scopeAwaitingDispatch(Builder $query): Builder
+    {
+        return $query->where('status', 'submitted')
+            ->whereNull('queued_at')
+            ->where(fn (Builder $q) => $q->whereNull('scheduled_for')->orWhere('scheduled_for', '<=', now()));
     }
 
     public function isFinal(): bool

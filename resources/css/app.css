@@ -14,7 +14,7 @@
     font-style: normal;
     font-weight: 300 700;
     font-display: swap;
-    src: url('/fonts/source-sans-3.woff2') format('woff2');
+    src: url('../fonts/source-sans-3.woff2') format('woff2');
 }
 
 @font-face {
@@ -22,7 +22,7 @@
     font-style: normal;
     font-weight: 400 500;
     font-display: swap;
-    src: url('/fonts/jetbrains-mono.woff2') format('woff2');
+    src: url('../fonts/jetbrains-mono.woff2') format('woff2');
 }
 
 @theme {
@@ -38,70 +38,80 @@
  */
 
 :root {
-    /* Foundation */
-    --navy: #1c2b4a;
-    --navy-inner: #2a3b5e;
-    --purple: #6f5cd8;
-    --page-bg: #f4f6f9;
+    /* Foundation — deep navy + professional blue, light content area */
+    --navy: #0f172a;
+    --navy-inner: #1e293b;
+    --purple: #2563eb;
+    --accent-hover: #1d4ed8;
+    --page-bg: #f8fafc;
+    --sidebar-bg: #ffffff;
+    --card-bg: #ffffff;
 
-    /* Purple tints */
-    --purple-mid: #a99bf0;
-    --purple-light: #d8d3f6;
-    --purple-chip-bg: #e7e2ff;
-    --purple-chip-text: #3f2fa0;
-    --row-highlight: #faf9ff;
+    /* Accent tints (light chips/washes — content area is light again) */
+    --purple-mid: #60a5fa;
+    --purple-light: #dbeafe;
+    --purple-chip-bg: #dbeafe;
+    --purple-chip-text: #1d4ed8;
+    --row-highlight: #f8fafc;
 
-    /* Text */
-    --text-primary: #1c2b4a;
-    --text-secondary: #546179;
-    --text-muted: #6c757d;
-    --text-inactive: #4a5568;
-    --text-placeholder: #9aa4b4;
+    /* Text (content area, on light backgrounds) */
+    --text-primary: #0f172a;
+    --text-secondary: #64748b;
+    --text-muted: #94a3b8;
+    --text-inactive: #64748b;
+    --text-placeholder: #94a3b8;
 
-    /* On navy */
+    /* On navy — used for the sidebar, which stays dark navy */
     --on-navy-heading: #ffffff;
-    --on-navy-body: #c5d2e6;
-    --on-navy-label: #9fb0cc;
+    --on-navy-body: #cbd5e1;
+    --on-navy-label: #94a3b8;
 
     /* Borders */
-    --border-card: #e3e7ed;
-    --border-input: #dfe4ec;
-    --border-divider: #eef1f5;
-    --border-chrome: #eef1f6;
-    --border-dropzone: #c3cbd9;
+    --border-card: #e2e8f0;
+    --border-input: #e2e8f0;
+    --border-divider: #edf1f5;
+    --border-chrome: #e2e8f0;
+    --border-dropzone: #cbd5e1;
 
     /* Status */
-    --success-bg: #b9f5d8;
-    --success-text: #0e5c3a;
-    --success-btn: #1f7a4d;
-    --success-toggle: #2ecc9b;
+    --success-bg: #dcfce7;
+    --success-text: #166534;
+    --success-btn: #16a34a;
+    --success-toggle: #22c55e;
 
-    --warning-bg: #ffe3a3;
-    --warning-text: #8a5a00;
-    --warning-panel-bg: #fff7e6;
-    --warning-panel-border: #ffd98a;
+    --warning-bg: #fef3c7;
+    --warning-text: #92400e;
+    --warning-panel-bg: #fffbeb;
+    --warning-panel-border: #fde68a;
 
-    --danger-bg: #fdd9d3;
-    --danger-text: #a33225;
-    --danger-panel-bg: #fdf1ef;
-    --danger-panel-border: #f0c2ba;
-    --danger-figure: #c0392b;
+    --danger-bg: #fee2e2;
+    --danger-text: #991b1b;
+    --danger-panel-bg: #fef2f2;
+    --danger-panel-border: #fca5a5;
+    --danger-figure: #dc2626;
 
-    --neutral-bg: #dfe4ec;
-    --neutral-text: #3d4a60;
-    --draft-bg: #e4e7ee;
-    --draft-text: #4a5568;
+    --neutral-bg: #f1f5f9;
+    --neutral-text: #475569;
+    --draft-bg: #e9edf2;
+    --draft-text: #475569;
 
     /* Rides Bootstrap's own primary variable so .text-primary, badges,
-       borders, focus rings etc. all pick up the purple accent for free.
-       .btn-primary is overridden separately below to navy — the spec
-       deliberately splits "accent" (purple) from "primary action" (navy)
-       instead of collapsing both into Bootstrap's one primary. */
+       borders, focus rings etc. all pick up the accent blue for free.
+       .btn-primary is overridden separately below to navy — accent (blue)
+       stays split from primary action (navy) instead of collapsing both
+       into Bootstrap's one primary. */
     --bs-primary: var(--purple);
-    --bs-primary-rgb: 111, 92, 216;
+    --bs-primary-rgb: 37, 99, 235;
+    --bs-body-bg: var(--page-bg);
+    --bs-body-color: var(--text-primary);
+    --bs-secondary-color: var(--text-inactive);
+    --bs-secondary-bg: var(--card-bg);
+    --bs-tertiary-bg: var(--card-bg);
+    --bs-border-color: var(--border-card);
+    --bs-border-color-translucent: var(--border-card);
     --bs-link-color: var(--purple);
-    --bs-link-color-rgb: 111, 92, 216;
-    --bs-link-hover-color: #5b49c0;
+    --bs-link-color-rgb: 37, 99, 235;
+    --bs-link-hover-color: var(--accent-hover);
 
     /* AdminLTE derives the content area's left margin from this, so the
        sidebar's own width (below) must stay in lockstep with it. */
@@ -148,8 +158,16 @@ pre,
 .form-control,
 .form-select {
     font-size: 12px;
+    background-color: var(--card-bg);
+    color: var(--text-primary);
     border-color: var(--border-input);
     border-radius: 4px;
+}
+
+.form-control:focus,
+.form-select:focus {
+    background-color: var(--card-bg);
+    color: var(--text-primary);
 }
 
 .form-control::placeholder {
@@ -179,7 +197,7 @@ small,
 
 .app-sidebar,
 .sidebar-wrapper {
-    background-color: #fff !important;
+    background-color: var(--sidebar-bg) !important;
 }
 
 .sidebar-brand .brand-link,
@@ -210,7 +228,7 @@ small,
 }
 
 .nav-sidebar .nav-link:hover {
-    background-color: #f1f0ff;
+    background-color: rgba(37, 99, 235, 0.08);
     color: var(--text-primary);
 }
 
@@ -267,7 +285,13 @@ small,
 /* ---- Top navbar (the deck's mockups don't show one at all) ---- */
 
 .app-header {
+    background-color: var(--page-bg) !important;
+    border-bottom: 1px solid var(--border-card);
     box-shadow: none !important;
+}
+
+.app-header .nav-link {
+    color: var(--text-primary);
 }
 
 /* ---- Content area ---- */
@@ -279,9 +303,10 @@ small,
 /* ---- Cards ---- */
 
 .card {
+    background-color: var(--card-bg);
     border: 1px solid var(--border-card);
     border-radius: 6px;
-    box-shadow: 0 12px 30px rgba(28, 43, 74, 0.07);
+    box-shadow: 0 12px 30px rgba(15, 23, 42, 0.07);
 }
 
 .card-header {
@@ -295,8 +320,8 @@ small,
 .info-box {
     border: 1px solid var(--border-card);
     border-radius: 6px;
-    background-color: #fff;
-    box-shadow: 0 12px 30px rgba(28, 43, 74, 0.07);
+    background-color: var(--card-bg);
+    box-shadow: 0 12px 30px rgba(15, 23, 42, 0.07);
 }
 
 .info-box .info-box-icon {
@@ -348,8 +373,24 @@ small,
 }
 
 .btn-outline-secondary {
+    background-color: #ffffff;
     border-color: var(--border-input);
     color: var(--text-inactive);
+}
+
+.btn-outline-secondary:hover,
+.btn-outline-secondary:focus,
+.btn-outline-secondary:active {
+    background-color: #ffffff !important;
+    border-color: var(--border-input) !important;
+    color: var(--text-primary) !important;
+}
+
+/* ---- DataTables export/download buttons (Excel/CSV/PDF/Print) ---- */
+
+.dt-button,
+.dt-buttons .btn {
+    background-color: #ffffff !important;
 }
 
 /* ---- Links ---- */
@@ -359,7 +400,7 @@ a {
 }
 
 a:hover {
-    color: #5b49c0;
+    color: var(--accent-hover);
 }
 
 .card a.text-primary,
@@ -373,13 +414,18 @@ a:hover {
 
 .table thead th,
 table.dataTable thead th {
-    background-color: var(--navy);
+    background-color: #4b49ac;
     color: #fff;
     font-weight: 600;
     font-size: 11.5px;
     border: none;
     vertical-align: middle;
     padding: 8px 11px;
+}
+
+table.dataTable thead th.dt-orderable-asc:hover,
+table.dataTable thead th.dt-orderable-desc:hover {
+    background-color: #3d3b8f;
 }
 
 .table td {
@@ -469,7 +515,7 @@ table.dataTable thead th {
 }
 
 .pill-green-box {
-    background-color: #eefbf3;
+    background-color: var(--success-bg);
     color: var(--success-text);
     font-size: 11.5px;
     line-height: 1.35;

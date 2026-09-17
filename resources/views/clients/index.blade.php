@@ -5,11 +5,12 @@
 
     <style>
         #clients-table thead th {
-            background-color: var(--bs-tertiary-bg);
+            background-color: #4b49ac;
+            color: #fff;
         }
         #clients-table thead th.dt-orderable-asc:hover,
         #clients-table thead th.dt-orderable-desc:hover {
-            background-color: var(--bs-secondary-bg);
+            background-color: #3d3b8f;
         }
     </style>
 

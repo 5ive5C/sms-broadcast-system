@@ -82,12 +82,7 @@ class QuickSendController extends Controller
         DB::transaction(function () use ($recipients, $client, $content, $encoding, $parts) {
             $wallet = \App\Models\Wallet::where('client_id', $client->id)->lockForUpdate()->firstOrFail();
 
-            $failedCount = 0;
-
             foreach ($recipients as $recipient) {
-                [$status, $failureReason, $finalAt] = $this->simulateOutcome();
-                $failedCount += $status === 'failed' ? 1 : 0;
-
                 Message::create([
                     'client_id' => $client->id,
                     'lane' => 'transactional',
@@ -95,24 +90,21 @@ class QuickSendController extends Controller
                     'content' => $content,
                     'encoding' => $encoding,
                     'parts' => $parts,
-                    'status' => $status,
+                    'status' => 'submitted',
                     'credit_charged' => $parts,
-                    'credit_refunded' => $status === 'failed' ? $parts : 0,
-                    'failure_reason' => $failureReason,
+                    'credit_refunded' => 0,
                     'submitted_at' => now(),
-                    'final_at' => $finalAt,
                 ]);
             }
 
-            // Failed sends are refunded automatically, so only the
-            // delivered/submitted portion is a net debit against the wallet.
-            $netCredits = (count($recipients) - $failedCount) * $parts;
-
+            // Full amount is debited up front; the dispatch-pending poller
+            // (app:dispatch-pending-sms) picks these rows up and queues the
+            // gateway job, which refunds any recipient it ends up rejecting.
             WalletLedgerEntry::post(
                 $wallet,
                 'quick_send',
                 'Quick send — '.count($recipients).' recipient(s)',
-                -$netCredits,
+                -(count($recipients) * $parts),
             );
         });
 
@@ -120,28 +112,6 @@ class QuickSendController extends Controller
 
         return redirect()->route('quick-send.create')
             ->with('status', 'Sent to '.number_format(count($recipients)).' recipient(s).');
-    }
-
-    /**
-     * There is no real telco behind this proof of concept — outcomes are
-     * drawn from a realistic delivered/submitted/failed mix instead of a
-     * live gateway response.
-     *
-     * @return array{0: string, 1: ?string, 2: ?\Illuminate\Support\Carbon}
-     */
-    protected function simulateOutcome(): array
-    {
-        $roll = mt_rand(1, 100);
-
-        if ($roll <= 92) {
-            return ['delivered', null, now()->addSeconds(mt_rand(1, 60))];
-        }
-
-        if ($roll <= 97) {
-            return ['submitted', null, null];
-        }
-
-        return ['failed', 'Handset unreachable', now()->addMinutes(mt_rand(1, 10))];
     }
 
     /**

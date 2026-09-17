@@ -133,11 +133,10 @@ class MessageController extends Controller
                     'content' => $original->content,
                     'encoding' => $original->encoding,
                     'parts' => $original->parts,
-                    'status' => 'delivered',
+                    'status' => 'submitted',
                     'credit_charged' => $original->parts,
                     'credit_refunded' => 0,
                     'submitted_at' => now(),
-                    'final_at' => now()->addSeconds(random_int(2, 30)),
                 ]);
             }
 

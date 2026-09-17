@@ -35,4 +35,9 @@ return [
         ],
     ],
 
+    'brevo' => [
+        'api_key' => env('BREVO_API_KEY'),
+        'sender_name' => env('BREVO_SENDER_NAME', 'SMSBRDCAST'),
+    ],
+
 ];

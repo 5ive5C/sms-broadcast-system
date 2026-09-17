@@ -273,15 +273,11 @@ class CampaignController extends Controller
         DB::transaction(function () use ($campaign, $recipients, $actor, $scheduledAt) {
             $wallet = Wallet::where('client_id', $campaign->client_id)->lockForUpdate()->firstOrFail();
 
-            $delivered = 0;
-            $submitted = 0;
-            $failed = 0;
-            $creditsSpent = 0;
+            $creditsRequired = 0;
 
             foreach ($recipients as $row) {
                 $content = $this->renderContent($campaign->content, $row);
                 ['encoding' => $encoding, 'parts' => $parts] = Message::smsParts($content);
-                [$status, $failureReason, $finalAt] = $this->simulateOutcome();
 
                 Message::create([
                     'client_id' => $campaign->client_id,
@@ -291,38 +287,38 @@ class CampaignController extends Controller
                     'content' => $content,
                     'encoding' => $encoding,
                     'parts' => $parts,
-                    'status' => $status,
+                    'status' => 'submitted',
                     'credit_charged' => $parts,
-                    'credit_refunded' => $status === 'failed' ? $parts : 0,
-                    'failure_reason' => $failureReason,
+                    'credit_refunded' => 0,
                     'submitted_at' => now(),
-                    'final_at' => $finalAt,
+                    'scheduled_for' => $scheduledAt,
                 ]);
 
-                $delivered += $status === 'delivered' ? 1 : 0;
-                $submitted += $status === 'submitted' ? 1 : 0;
-                $failed += $status === 'failed' ? 1 : 0;
-                $creditsSpent += $status === 'failed' ? 0 : $parts;
+                $creditsRequired += $parts;
             }
 
+            // Full amount is debited up front; the dispatch-pending poller
+            // (app:dispatch-pending-sms) picks these rows up — immediately,
+            // or once scheduled_for is reached — and queues the gateway job,
+            // which refunds any recipient it ends up rejecting.
             WalletLedgerEntry::post(
                 $wallet,
                 'campaign',
                 'Campaign — '.$campaign->name,
-                -$creditsSpent,
+                -$creditsRequired,
                 $campaign,
             );
 
             $campaign->update([
-                'status' => $scheduledAt ? 'scheduled' : 'completed',
+                'status' => $scheduledAt ? 'scheduled' : 'sending',
                 'scheduled_at' => $scheduledAt,
                 'launched_at' => $scheduledAt ? null : now(),
                 'launched_by' => $actor->id,
-                'delivered_count' => $delivered,
-                'submitted_count' => $submitted,
-                'failed_count' => $failed,
-                'credits_required' => count($recipients),
-                'credits_spent' => $creditsSpent,
+                'delivered_count' => 0,
+                'submitted_count' => count($recipients),
+                'failed_count' => 0,
+                'credits_required' => $creditsRequired,
+                'credits_spent' => $creditsRequired,
                 'pending_recipients' => null,
             ]);
         });
@@ -474,25 +470,5 @@ class CampaignController extends Controller
     protected function renderContent(string $content, array $row): string
     {
         return preg_replace_callback('/\{(\w+)\}/', fn ($m) => $row[$m[1]] ?? $m[0], $content);
-    }
-
-    /**
-     * @return array{0: string, 1: ?string, 2: ?\Illuminate\Support\Carbon}
-     */
-    protected function simulateOutcome(): array
-    {
-        $roll = mt_rand(1, 100);
-
-        if ($roll <= 88) {
-            return ['delivered', null, now()->addMinutes(mt_rand(1, 120))];
-        }
-
-        if ($roll <= 97) {
-            return ['submitted', null, null];
-        }
-
-        $reasons = ['Handset unreachable', 'Rejected by iSMS after 3 attempts', 'Number not in service'];
-
-        return ['failed', $reasons[array_rand($reasons)], now()->addMinutes(mt_rand(1, 120))];
     }
 }
