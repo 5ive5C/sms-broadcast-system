@@ -33,7 +33,13 @@
                 @forelse($templates as $template)
                     <tr>
                         <td class="fw-semibold">{{ $template->name }}</td>
-                        <td>{{ collect($template->placeholders)->map(fn ($p) => '{'.$p.'}')->implode(' ') ?: '—' }}</td>
+                        <td>
+                            @forelse($template->placeholders as $placeholder)
+                                <span class="placeholder-token me-1">{{ '{'.$placeholder.'}' }}</span>
+                            @empty
+                                —
+                            @endforelse
+                        </td>
                         <td>{{ $template->parts }}</td>
                         <td>{{ $template->last_used_at?->format('d M') ?? 'never' }}</td>
                         <td><a href="{{ route('templates.edit', $template) }}">Edit</a></td>

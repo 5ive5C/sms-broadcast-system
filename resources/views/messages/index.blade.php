@@ -38,7 +38,7 @@
                 </select>
             </div>
             <div class="col-auto ms-auto">
-                <a href="{{ route('messages.export', request()->query()) }}" class="btn btn-outline-secondary btn-sm">Export</a>
+                <a href="{{ route('messages.export', request()->query()) }}" class="btn btn-success btn-sm">Export</a>
             </div>
         </form>
 

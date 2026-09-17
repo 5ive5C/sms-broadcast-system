@@ -180,8 +180,6 @@ small,
 .app-sidebar,
 .sidebar-wrapper {
     background-color: #fff !important;
-    border-right: 1px solid var(--border-card);
-    width: 155px;
 }
 
 .sidebar-brand .brand-link,
@@ -257,12 +255,13 @@ small,
     content: '';
 }
 
-.nav-sidebar .nav-link p {
-    margin: 0;
-    white-space: normal;
-    overflow: visible;
-    text-overflow: clip;
-    line-height: 1.25;
+.app-sidebar .nav-link p,
+.sidebar-wrapper .nav-link p {
+    margin: 0 !important;
+    white-space: normal !important;
+    overflow: visible !important;
+    text-overflow: clip !important;
+    line-height: 1.25 !important;
 }
 
 /* ---- Top navbar (the deck's mockups don't show one at all) ---- */

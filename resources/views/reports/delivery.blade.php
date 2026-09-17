@@ -47,7 +47,7 @@
                 <button type="submit" class="btn btn-primary btn-sm">Search</button>
             </div>
             <div class="col-auto ms-auto">
-                <a href="{{ route('reports.delivery.export', request()->query()) }}" class="btn btn-outline-secondary btn-sm">Export CSV</a>
+                <a href="{{ route('reports.delivery.export', request()->query()) }}" class="btn btn-success btn-sm">Export CSV</a>
             </div>
         </form>
 
