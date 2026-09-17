@@ -10,7 +10,7 @@
 
     @include('partials.sweetalert')
 
-    <x-adminlte-card icon="bi bi-chat-dots">
+    <x-adminlte-card>
         <x-slot name="titleSlot">Messages</x-slot>
 
         <form method="get" class="row g-2 align-items-end mb-3">
@@ -61,8 +61,8 @@
                         <td>{{ $message->lane }}</td>
                         <td>{{ $message->campaign?->name ?? '—' }}</td>
                         <td>
-                            @php($theme = ['delivered' => 'success', 'submitted' => 'warning', 'failed' => 'danger'][$message->status])
-                            <span class="text-{{ $theme }} fw-semibold">{{ ucfirst($message->status) }}</span>
+                            @php($theme = ['delivered' => 'green', 'submitted' => 'slate', 'failed' => 'red'][$message->status])
+                            <span class="pill pill-{{ $theme }}">{{ ucfirst($message->status) }}</span>
                         </td>
                         <td>{{ $message->final_at?->format('d M H:i') ?? 'awaiting telco' }}</td>
                     </tr>

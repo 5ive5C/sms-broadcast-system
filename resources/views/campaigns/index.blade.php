@@ -10,7 +10,7 @@
 
     @include('partials.sweetalert')
 
-    <x-adminlte-card icon="bi bi-megaphone">
+    <x-adminlte-card>
         <x-slot name="titleSlot">Campaigns</x-slot>
 
         <div class="d-flex justify-content-between align-items-center mb-3">
@@ -48,8 +48,8 @@
                         <td>{{ $campaign->status === 'draft' || $campaign->status === 'scheduled' ? '—' : number_format($campaign->delivered_count) }}</td>
                         <td>{{ $campaign->status === 'draft' || $campaign->status === 'scheduled' ? '—' : number_format($campaign->failed_count) }}</td>
                         <td>
-                            @php($theme = ['draft' => 'secondary', 'scheduled' => 'info', 'sending' => 'warning', 'completed' => 'success', 'cancelled' => 'danger'][$campaign->status])
-                            <span class="badge text-bg-{{ $theme }}">{{ ucfirst($campaign->status) }}</span>
+                            @php($theme = ['draft' => 'gray', 'scheduled' => 'amber', 'sending' => 'indigo', 'completed' => 'green', 'cancelled' => 'red'][$campaign->status])
+                            <span class="pill pill-{{ $theme }}">{{ ucfirst($campaign->status) }}</span>
                         </td>
                     </tr>
                 @empty

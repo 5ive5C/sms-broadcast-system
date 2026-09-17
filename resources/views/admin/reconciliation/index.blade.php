@@ -37,7 +37,7 @@
             </div>
         </div>
 
-        <x-adminlte-card icon="bi bi-exclamation-diamond">
+        <x-adminlte-card>
             <x-slot name="titleSlot">Discrepancies</x-slot>
 
             <table class="table table-striped align-middle">

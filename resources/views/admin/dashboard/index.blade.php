@@ -13,22 +13,22 @@
 
     <div class="row mb-4">
         <div class="col-md-3">
-            <x-adminlte-info-box title="Active clients" text="{{ number_format($clientCounts['active'] ?? 0) }}" icon="bi bi-building" />
+            <x-adminlte-info-box title="Active clients" text="{{ number_format($clientCounts['active'] ?? 0) }}" />
         </div>
         <div class="col-md-3">
-            <x-adminlte-info-box title="Pending top-ups" text="{{ number_format($pendingTopUps) }}" icon="bi bi-cash-coin" />
+            <x-adminlte-info-box title="Pending top-ups" text="{{ number_format($pendingTopUps) }}" />
         </div>
         <div class="col-md-3">
-            <x-adminlte-info-box title="Sent today" text="{{ number_format($sentToday) }}" icon="bi bi-send" />
+            <x-adminlte-info-box title="Sent today" text="{{ number_format($sentToday) }}" />
         </div>
         <div class="col-md-3">
-            <x-adminlte-info-box title="Reconciliation match" text="{{ $reconciliationMatch !== null ? $reconciliationMatch.'%' : '—' }}" icon="bi bi-arrow-left-right" />
+            <x-adminlte-info-box title="Reconciliation match" text="{{ $reconciliationMatch !== null ? $reconciliationMatch.'%' : '—' }}" />
         </div>
     </div>
 
     <div class="row">
         <div class="col-md-4 mb-4">
-            <x-adminlte-card icon="bi bi-building">
+            <x-adminlte-card>
                 <x-slot name="titleSlot">Clients by Status</x-slot>
 
                 <ul class="list-unstyled mb-0">
@@ -43,7 +43,7 @@
         </div>
 
         <div class="col-md-8 mb-4">
-            <x-adminlte-card icon="bi bi-journal-text">
+            <x-adminlte-card>
                 <x-slot name="titleSlot">Recent Activity</x-slot>
 
                 <table class="table table-sm mb-0">

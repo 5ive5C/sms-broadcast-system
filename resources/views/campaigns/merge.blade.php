@@ -11,7 +11,7 @@
     @include('partials.sweetalert')
     @include('campaigns.partials.steps', ['current' => 3])
 
-    <x-adminlte-card icon="bi bi-diagram-3">
+    <x-adminlte-card>
         <x-slot name="titleSlot">Map Columns to Placeholders</x-slot>
 
         <p class="text-body-secondary">

@@ -37,10 +37,10 @@ class ClientController extends Controller
                 ->addColumn('pricing_tier', fn (Client $client) => $client->pricingTier?->name ?? '—')
                 ->addColumn('balance', fn (Client $client) => number_format($client->wallet?->balance ?? 0))
                 ->addColumn('status', fn (Client $client) => match ($client->status) {
-                    'active' => '<span class="text-success fw-semibold">Active</span>',
-                    'pending' => '<span class="text-info fw-semibold">Pending</span>',
-                    'suspended' => '<span class="text-warning fw-semibold">Suspended</span>',
-                    default => '<span class="text-danger fw-semibold">Inactive</span>',
+                    'active' => '<span class="pill pill-green">Active</span>',
+                    'pending' => '<span class="pill pill-amber">Pending</span>',
+                    'suspended' => '<span class="pill pill-gray">Suspended</span>',
+                    default => '<span class="pill pill-red">Inactive</span>',
                 })
                 ->editColumn('created_at', fn (Client $client) => $client->created_at?->format('d-M-Y H:i:s'))
                 ->addColumn('actions', fn (Client $client) => view('clients.partials.actions', ['client' => $client])->render())

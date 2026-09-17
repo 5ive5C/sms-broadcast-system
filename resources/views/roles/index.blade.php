@@ -15,7 +15,7 @@
     <div class="row">
         @foreach($roles as $role)
             <div class="col-lg-6 mb-4">
-                <x-adminlte-card icon="bi bi-person-badge">
+                <x-adminlte-card>
                     <x-slot name="titleSlot">
                         {{ $role->name }}
                         <span class="badge text-bg-secondary ms-1">{{ $role->users_count }} user(s)</span>
@@ -51,7 +51,7 @@
         @endforeach
 
         <div class="col-lg-6 mb-4">
-            <x-adminlte-card icon="bi bi-plus-circle">
+            <x-adminlte-card>
                 <x-slot name="titleSlot">New Role</x-slot>
 
                 <form action="{{ route('roles.store') }}" method="post">

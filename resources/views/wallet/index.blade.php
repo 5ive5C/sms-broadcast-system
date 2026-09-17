@@ -12,20 +12,20 @@
 
     <div class="row mb-4">
         <div class="col-md-3">
-            <x-adminlte-info-box title="Available credit" text="{{ number_format($wallet->balance) }}" icon="bi bi-wallet2" />
+            <x-adminlte-info-box title="Available credit" text="{{ number_format($wallet->balance) }}" />
         </div>
         <div class="col-md-3">
-            <x-adminlte-info-box title="Used this month" text="{{ number_format($usedThisMonth) }}" icon="bi bi-graph-down" />
+            <x-adminlte-info-box title="Used this month" text="{{ number_format($usedThisMonth) }}" />
         </div>
         <div class="col-md-3">
-            <x-adminlte-info-box title="Refunded" text="{{ number_format($refunded) }}" icon="bi bi-arrow-counterclockwise" />
+            <x-adminlte-info-box title="Refunded" text="{{ number_format($refunded) }}" />
         </div>
         <div class="col-md-3">
-            <x-adminlte-info-box title="Runway" text="~{{ $usedThisMonth > 0 ? max(1, round(($wallet->balance / $usedThisMonth) * 30)) : '—' }} days" icon="bi bi-hourglass-split" />
+            <x-adminlte-info-box title="Runway" text="~{{ $usedThisMonth > 0 ? max(1, round(($wallet->balance / $usedThisMonth) * 30)) : '—' }} days" />
         </div>
     </div>
 
-    <x-adminlte-card icon="bi bi-list-ul">
+    <x-adminlte-card>
         <x-slot name="titleSlot">Ledger</x-slot>
 
         <table class="table table-striped align-middle">

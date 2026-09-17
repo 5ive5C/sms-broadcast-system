@@ -37,7 +37,7 @@ return [
     |
     */
 
-    'title' => 'AdminLTE 4',
+    'title' => 'SMS Broadcast',
     'title_prefix' => '',
     'title_postfix' => '',
 
@@ -77,7 +77,7 @@ return [
     |
     */
 
-    'logo' => '<b>Admin</b>LTE',
+    'logo' => '<b>SMS Broadcast</b>',
     'logo_img' => 'vendor/adminlte/dist/assets/img/AdminLTELogo.png',
     'logo_img_class' => 'brand-image opacity-75 shadow',
     'logo_img_xl' => null,
@@ -519,9 +519,9 @@ return [
     |
     */
 
-    'classes_body' => 'bg-body-tertiary',
+    'classes_body' => 'app-bg',
     'classes_brand' => '',
-    'classes_brand_text' => 'fw-light',
+    'classes_brand_text' => 'fw-bold',
     'classes_wrapper' => '',
     'classes_content_wrapper' => '',
     'classes_footer' => '',
@@ -529,9 +529,9 @@ return [
     'classes_content' => '',
     'classes_content_top_area' => '',
     'classes_content_bottom_area' => '',
-    'classes_sidebar' => 'bg-body-secondary shadow',
+    'classes_sidebar' => 'bg-white',
     'classes_sidebar_nav' => '',
-    'classes_topnav' => 'bg-body',
+    'classes_topnav' => 'bg-white border-bottom',
     'classes_topnav_nav' => 'navbar-expand',
     'classes_topnav_container' => 'container-fluid',
 
@@ -551,7 +551,7 @@ return [
     // the classic AdminLTE dark sidebar, 'light' for a light one, or null to
     // inherit the color mode of the page. Any other value is read as 'dark'.
 
-    'sidebar_theme' => 'dark',
+    'sidebar_theme' => 'light',
 
     // Behavior of the sidebar. The mini mode keeps the icons of a collapsed
     // sidebar visible, 'sidebar_collapse' starts the panel with the sidebar
@@ -780,141 +780,112 @@ return [
     */
 
     'menu' => [
-        // Navbar items:
-        [
-            'type' => 'navbar-search',
-            'text' => 'search',
-            'topnav_right' => true,
-        ],
-        [
-            'type' => 'darkmode-widget',
-            'topnav_right' => true,
-        ],
-        [
-            'type' => 'fullscreen-widget',
-            'topnav_right' => true,
-        ],
+        // Navbar items — the deck's mockups show no top navbar chrome at
+        // all (just the sidebar), so this is trimmed to nothing extra.
 
-        // Sidebar items:
-        [
-            'type' => 'sidebar-menu-search',
-            'text' => 'search',
-        ],
-
-        // Internal "SMS Broadcast" admin portal.
+        // Internal "SMS Broadcast" admin portal. Flat list, no icons —
+        // matches the deck's sidebar exactly.
         [
             'text' => 'Dashboard',
             'url' => 'admin/dashboard',
-            'icon' => 'bi bi-speedometer2',
             'can' => 'internal-portal',
         ],
         [
             'text' => 'Exit "View as" client',
             'url' => 'admin/view-as/exit',
-            'icon' => 'bi bi-box-arrow-left',
             'can' => 'viewing-as-client',
         ],
         [
             'text' => 'Clients',
             'url' => 'admin/clients',
-            'icon' => 'bi bi-building',
             'can' => 'internal-portal',
         ],
         [
             'text' => 'Top-up approvals',
             'url' => 'admin/top-ups',
-            'icon' => 'bi bi-cash-coin',
             'can' => 'internal-portal',
         ],
         [
             'text' => 'Pricing tiers',
             'url' => 'admin/pricing',
-            'icon' => 'bi bi-tags',
             'can' => 'internal-portal',
         ],
         [
             'text' => 'Queue monitor',
             'url' => 'admin/queue',
-            'icon' => 'bi bi-hdd-stack',
             'can' => 'internal-portal',
         ],
         [
             'text' => 'Reconciliation',
             'url' => 'admin/reconciliation',
-            'icon' => 'bi bi-arrow-left-right',
             'can' => 'internal-portal',
         ],
         [
             'text' => 'Audit log',
             'url' => 'admin/audit',
-            'icon' => 'bi bi-journal-text',
             'can' => 'internal-portal',
         ],
 
         // Client portal. Visible to everyone — an internal admin lands on
-        // the "pick a client" prompt until they use View as on one.
+        // the "pick a client" prompt until they use View as on one. Labeled
+        // "Client Dashboard" only to disambiguate from the internal
+        // Dashboard above when a super-admin can see both at once; a real
+        // client user only ever sees this one, matching the deck's plain
+        // "Dashboard" label.
         [
             'text' => 'Client Dashboard',
             'url' => 'dashboard',
-            'icon' => 'bi bi-speedometer2',
         ],
         [
             'text' => 'Quick send',
             'url' => 'quick-send',
-            'icon' => 'bi bi-send',
             'can' => 'quick-send.manage',
         ],
         [
             'text' => 'Campaigns',
-            'icon' => 'bi bi-megaphone',
             'can' => 'campaigns.manage',
             'submenu' => [
-                ['text' => 'All campaigns', 'url' => 'campaigns', 'icon' => 'bi bi-circle'],
-                ['text' => 'New campaign', 'url' => 'campaigns/new', 'icon' => 'bi bi-circle'],
-                ['text' => 'Templates', 'url' => 'campaigns/templates', 'icon' => 'bi bi-circle'],
+                ['text' => 'All campaigns', 'url' => 'campaigns'],
+                ['text' => 'New campaign', 'url' => 'campaigns/new'],
+                ['text' => 'Templates', 'url' => 'campaigns/templates'],
             ],
         ],
         [
             'text' => 'Messages',
-            'icon' => 'bi bi-chat-dots',
             'can' => 'reports.view',
             'submenu' => [
-                ['text' => 'Message log', 'url' => 'messages', 'icon' => 'bi bi-circle'],
-                ['text' => 'Failed & resend', 'url' => 'messages/failed', 'icon' => 'bi bi-circle'],
+                ['text' => 'Message log', 'url' => 'messages'],
+                ['text' => 'Failed & resend', 'url' => 'messages/failed'],
             ],
         ],
         [
             'text' => 'Wallet',
-            'icon' => 'bi bi-wallet2',
             'submenu' => [
-                ['text' => 'Ledger', 'url' => 'wallet', 'icon' => 'bi bi-circle'],
-                ['text' => 'Request top-up', 'url' => 'wallet/top-up', 'icon' => 'bi bi-circle', 'can' => 'top-ups.request'],
-                ['text' => 'Invoices', 'url' => 'wallet/invoices', 'icon' => 'bi bi-circle'],
+                ['text' => 'Ledger', 'url' => 'wallet'],
+                ['text' => 'Request top-up', 'url' => 'wallet/top-up', 'can' => 'top-ups.request'],
+                ['text' => 'Invoices', 'url' => 'wallet/invoices'],
             ],
         ],
         [
             'text' => 'Reports',
-            'icon' => 'bi bi-bar-chart',
             'can' => 'reports.view',
             'submenu' => [
-                ['text' => 'Delivery report', 'url' => 'reports/delivery', 'icon' => 'bi bi-circle'],
-                ['text' => 'Usage and cost', 'url' => 'reports/usage', 'icon' => 'bi bi-circle'],
+                ['text' => 'Delivery report', 'url' => 'reports/delivery'],
+                ['text' => 'Usage and cost', 'url' => 'reports/usage'],
             ],
         ],
         [
             'text' => 'Users',
-            'icon' => 'bi bi-people',
             'can' => 'viewAny',
             'model' => \App\Models\User::class,
             'submenu' => [
-                ['text' => 'All users', 'url' => 'users', 'icon' => 'bi bi-circle'],
-                ['text' => 'Staff and roles', 'url' => 'roles', 'icon' => 'bi bi-circle', 'can' => 'users.manage'],
+                ['text' => 'All users', 'url' => 'users'],
+                ['text' => 'Staff and roles', 'url' => 'roles', 'can' => 'users.manage'],
             ],
         ],
         [
-            'text' => 'API Keys',
+            'text' => 'Settings',
             'url' => 'settings/api-keys',
-            'icon' => 'bi bi-gear',
             'can' => 'api-keys.manage',
         ],
     ],

@@ -10,7 +10,7 @@
 
     @include('partials.sweetalert')
 
-    <x-adminlte-card icon="bi bi-truck">
+    <x-adminlte-card>
         <x-slot name="titleSlot">Delivery Report</x-slot>
 
         <form method="get" class="row g-2 align-items-end mb-3">
@@ -61,7 +61,7 @@
                 <div class="small text-body-secondary">delivered</div>
             </div>
             <div class="col">
-                <div class="fs-4 fw-bold text-warning">{{ number_format($totals->submitted) }}</div>
+                <div class="fs-4 fw-bold text-body-secondary">{{ number_format($totals->submitted) }}</div>
                 <div class="small text-body-secondary">submitted</div>
             </div>
             <div class="col">
@@ -94,8 +94,8 @@
                         <td>{{ $message->campaign?->name ?? '—' }}</td>
                         <td>{{ $message->lane }}</td>
                         <td>
-                            @php($theme = ['delivered' => 'success', 'submitted' => 'warning', 'failed' => 'danger'][$message->status])
-                            <span class="text-{{ $theme }} fw-semibold">{{ ucfirst($message->status) }}</span>
+                            @php($theme = ['delivered' => 'green', 'submitted' => 'slate', 'failed' => 'red'][$message->status])
+                            <span class="pill pill-{{ $theme }}">{{ ucfirst($message->status) }}</span>
                         </td>
                         <td>{{ $message->submitted_at->format('d M H:i') }}</td>
                         <td>{{ $message->final_at?->format('d M H:i') ?? 'awaiting telco' }}</td>

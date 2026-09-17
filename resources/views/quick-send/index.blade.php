@@ -16,7 +16,7 @@
         <div class="row">
             {{-- Recipients --}}
             <div class="col-lg-5 mb-4">
-                <x-adminlte-card icon="bi bi-people">
+                <x-adminlte-card>
                     <x-slot name="titleSlot">Recipients</x-slot>
 
                     <ul class="nav nav-tabs mb-3" role="tablist">
@@ -59,15 +59,15 @@
                     </div>
 
                     <div class="d-flex align-items-center justify-content-between mt-3 p-3 rounded-3 bg-body-tertiary">
-                        <span class="fw-semibold"><i class="bi bi-person-check me-1"></i> Valid numbers detected</span>
-                        <span class="badge text-bg-primary fs-6" id="recipient-count">0</span>
+                        <span class="fw-semibold">Valid numbers detected</span>
+                        <span class="pill pill-indigo fs-6" id="recipient-count">0</span>
                     </div>
                 </x-adminlte-card>
             </div>
 
             {{-- Message content --}}
             <div class="col-lg-7 mb-4">
-                <x-adminlte-card icon="bi bi-chat-left-text">
+                <x-adminlte-card>
                     <x-slot name="titleSlot">Message</x-slot>
 
                     <div class="mb-2">
@@ -89,7 +89,7 @@
                         <div class="small fw-semibold text-body-secondary mb-2">
                             <i class="bi bi-phone me-1"></i> Preview
                         </div>
-                        <div class="d-inline-block px-3 py-2 rounded-4 bg-primary text-white" style="max-width: 100%; word-break: break-word; border-bottom-left-radius: 0.25rem !important;">
+                        <div class="d-inline-block px-3 py-2 rounded-3 bg-white border" style="max-width: 100%; word-break: break-word;">
                             <span id="content-preview" class="small">Your message will appear here&hellip;</span>
                         </div>
                     </div>

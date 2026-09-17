@@ -10,7 +10,7 @@
 
     @include('partials.sweetalert')
 
-    <x-adminlte-card icon="bi bi-graph-up-arrow">
+    <x-adminlte-card>
         <x-slot name="titleSlot">Usage and Cost</x-slot>
 
         <form method="get" class="row g-2 align-items-end mb-3">
@@ -62,7 +62,7 @@
 
     <div class="row">
         <div class="col-lg-6 mb-4">
-            <x-adminlte-card icon="bi bi-megaphone">
+            <x-adminlte-card>
                 <x-slot name="titleSlot">By Campaign</x-slot>
 
                 <table class="table table-sm mb-0">

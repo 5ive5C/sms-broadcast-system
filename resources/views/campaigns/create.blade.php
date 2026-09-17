@@ -16,7 +16,7 @@
 
         <div class="row">
             <div class="col-lg-7 mb-4">
-                <x-adminlte-card icon="bi bi-pencil-square">
+                <x-adminlte-card>
                     <x-slot name="titleSlot">Compose</x-slot>
 
                     <div class="mb-3">
@@ -65,11 +65,11 @@
             </div>
 
             <div class="col-lg-5 mb-4">
-                <x-adminlte-card icon="bi bi-phone">
+                <x-adminlte-card>
                     <x-slot name="titleSlot">Preview</x-slot>
 
                     <div class="border rounded-3 p-3 bg-body-tertiary">
-                        <div class="d-inline-block px-3 py-2 rounded-4 bg-primary text-white" style="max-width: 100%; word-break: break-word; border-bottom-left-radius: 0.25rem !important;">
+                        <div class="d-inline-block px-3 py-2 rounded-3 bg-white border" style="max-width: 100%; word-break: break-word;">
                             <span id="content-preview" class="small">Your message will appear here&hellip;</span>
                         </div>
                     </div>

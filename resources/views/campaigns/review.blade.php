@@ -13,11 +13,11 @@
 
     <div class="row">
         <div class="col-lg-7 mb-4">
-            <x-adminlte-card icon="bi bi-chat-left-text">
+            <x-adminlte-card>
                 <x-slot name="titleSlot">Message</x-slot>
 
                 <div class="border rounded-3 p-3 bg-body-tertiary mb-3">
-                    <div class="d-inline-block px-3 py-2 rounded-4 bg-primary text-white" style="max-width: 100%; word-break: break-word;">
+                    <div class="d-inline-block px-3 py-2 rounded-3 bg-white border" style="max-width: 100%; word-break: break-word;">
                         <span class="small">{{ $preview }}</span>
                     </div>
                 </div>
@@ -40,7 +40,7 @@
         </div>
 
         <div class="col-lg-5 mb-4">
-            <x-adminlte-card icon="bi bi-rocket-takeoff">
+            <x-adminlte-card>
                 <x-slot name="titleSlot">Send</x-slot>
 
                 @if($balanceAfter < 0)

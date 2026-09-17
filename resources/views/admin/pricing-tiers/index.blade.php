@@ -10,7 +10,7 @@
 
     @include('partials.sweetalert')
 
-    <x-adminlte-card icon="bi bi-tags">
+    <x-adminlte-card>
         <x-slot name="titleSlot">Pricing Tiers</x-slot>
 
         <table class="table table-striped align-middle">
@@ -38,8 +38,8 @@
                                 <input type="hidden" name="min_credits" value="{{ $tier->min_credits }}">
                                 <input type="hidden" name="price_per_credit" value="{{ $tier->price_per_credit }}">
                                 <input type="hidden" name="is_active" value="{{ $tier->is_active ? 0 : 1 }}">
-                                <button type="submit" class="btn btn-link p-0 border-0 {{ $tier->is_active ? 'text-success' : 'text-warning' }}">
-                                    {{ $tier->is_active ? 'Active' : 'Draft' }}
+                                <button type="submit" class="btn btn-link p-0 border-0">
+                                    <span class="pill {{ $tier->is_active ? 'pill-green' : 'pill-gray' }}">{{ $tier->is_active ? 'Active' : 'Draft' }}</span>
                                 </button>
                             </form>
                         </td>
@@ -50,7 +50,7 @@
         </table>
     </x-adminlte-card>
 
-    <x-adminlte-card icon="bi bi-plus-circle">
+    <x-adminlte-card>
         <x-slot name="titleSlot">Add Tier</x-slot>
 
         <form action="{{ route('pricing-tiers.store') }}" method="post" class="row g-3 align-items-end">

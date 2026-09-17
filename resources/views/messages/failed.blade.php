@@ -10,7 +10,7 @@
 
     @include('partials.sweetalert')
 
-    <x-adminlte-card icon="bi bi-x-circle">
+    <x-adminlte-card>
         <x-slot name="titleSlot">Failed Messages &middot; {{ $messages->total() }} results</x-slot>
 
         <form method="get" class="row g-2 align-items-end mb-3">

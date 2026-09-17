@@ -19,7 +19,7 @@
         </x-adminlte-alert>
     @endif
 
-    <x-adminlte-card icon="bi bi-key">
+    <x-adminlte-card>
         <x-slot name="titleSlot">Keys</x-slot>
 
         <table class="table table-striped align-middle">
@@ -42,9 +42,9 @@
                         <td>{{ $apiKey->last_used_at?->diffForHumans() ?? 'never' }}</td>
                         <td>
                             @if($apiKey->isRevoked())
-                                <span class="text-danger fw-semibold">Revoked</span>
+                                <span class="pill pill-gray">Revoked</span>
                             @else
-                                <span class="text-success fw-semibold">Active</span>
+                                <span class="pill pill-green">Active</span>
                             @endif
                         </td>
                         <td>
@@ -67,7 +67,7 @@
         </table>
     </x-adminlte-card>
 
-    <x-adminlte-card icon="bi bi-plus-circle">
+    <x-adminlte-card>
         <x-slot name="titleSlot">Generate New Key</x-slot>
 
         <form action="{{ route('api-keys.store') }}" method="post" class="row g-3 align-items-end">

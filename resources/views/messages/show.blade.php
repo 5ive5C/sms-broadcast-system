@@ -4,8 +4,8 @@
 
 @section('content_header')
     <h1>{{ $message->code }}</h1>
-    @php($theme = ['delivered' => 'success', 'submitted' => 'warning', 'failed' => 'danger'][$message->status])
-    <span class="badge text-bg-{{ $theme }}">{{ ucfirst($message->status) }}</span>
+    @php($theme = ['delivered' => 'green', 'submitted' => 'slate', 'failed' => 'red'][$message->status])
+    <span class="pill pill-{{ $theme }}">{{ ucfirst($message->status) }}</span>
 @stop
 
 @section('content')
@@ -14,7 +14,7 @@
 
     <div class="row">
         <div class="col-lg-6 mb-4">
-            <x-adminlte-card icon="bi bi-info-circle">
+            <x-adminlte-card>
                 <x-slot name="titleSlot">Details</x-slot>
 
                 <dl class="row mb-0">
@@ -31,14 +31,14 @@
                 </dl>
             </x-adminlte-card>
 
-            <x-adminlte-card icon="bi bi-chat-text">
+            <x-adminlte-card>
                 <x-slot name="titleSlot">Content</x-slot>
                 <p class="mb-0">{{ $message->lane === 'tac' ? '(TAC content is not stored)' : $message->content }}</p>
             </x-adminlte-card>
         </div>
 
         <div class="col-lg-6 mb-4">
-            <x-adminlte-card icon="bi bi-clock-history">
+            <x-adminlte-card>
                 <x-slot name="titleSlot">Attempt History</x-slot>
 
                 <table class="table table-sm mb-0">

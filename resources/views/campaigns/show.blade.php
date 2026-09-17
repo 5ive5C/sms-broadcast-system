@@ -17,7 +17,7 @@
 
     @include('partials.sweetalert')
 
-    <x-adminlte-card icon="bi bi-graph-up">
+    <x-adminlte-card>
         <x-slot name="titleSlot">Dispatched</x-slot>
 
         @php($dispatched = $campaign->delivered_count + $campaign->submitted_count + $campaign->failed_count)
@@ -33,7 +33,7 @@
                 <div class="small text-body-secondary">Delivered</div>
             </div>
             <div class="col">
-                <div class="fs-4 fw-bold text-warning">{{ number_format($campaign->submitted_count) }}</div>
+                <div class="fs-4 fw-bold text-body-secondary">{{ number_format($campaign->submitted_count) }}</div>
                 <div class="small text-body-secondary">Submitted</div>
             </div>
             <div class="col">
@@ -47,7 +47,7 @@
         </div>
     </x-adminlte-card>
 
-    <x-adminlte-card icon="bi bi-clock-history">
+    <x-adminlte-card>
         <x-slot name="titleSlot">Timeline</x-slot>
 
         <table class="table table-sm mb-0">

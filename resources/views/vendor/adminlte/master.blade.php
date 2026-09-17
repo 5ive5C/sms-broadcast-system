@@ -237,6 +237,11 @@
     {{-- Custom Stylesheets (post AdminLTE) --}}
     @yield('adminlte_css')
 
+    {{-- App theme overrides (loaded after AdminLTE/Bootstrap so it wins the
+         cascade without having to switch 'laravel_asset_bundling' and lose
+         the vendor-published AdminLTE/Bootstrap/DataTables CSS links above). --}}
+    @vite(['resources/css/app.css'])
+
     {{-- Favicon --}}
     @if(config('adminlte.use_ico_only'))
         <link rel="shortcut icon" href="{{ asset('favicons/favicon.ico') }}" />

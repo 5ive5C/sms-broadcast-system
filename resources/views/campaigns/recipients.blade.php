@@ -12,7 +12,7 @@
     @include('campaigns.partials.steps', ['current' => 2])
 
     @if($placeholders)
-        <x-adminlte-card icon="bi bi-upload">
+        <x-adminlte-card>
             <x-slot name="titleSlot">Upload Recipients</x-slot>
 
             <p class="text-body-secondary">
@@ -33,7 +33,7 @@
             </form>
         </x-adminlte-card>
     @else
-        <x-adminlte-card icon="bi bi-people">
+        <x-adminlte-card>
             <x-slot name="titleSlot">Recipients</x-slot>
 
             <form action="{{ route('campaigns.recipients.store', $campaign) }}" method="post" enctype="multipart/form-data">
@@ -67,7 +67,7 @@
     @endif
 
     @if($campaign->rejected_count > 0)
-        <x-adminlte-card icon="bi bi-exclamation-triangle" class="mt-4">
+        <x-adminlte-card class="mt-4">
             <x-slot name="titleSlot">Rejected Rows ({{ $campaign->rejected_count }})</x-slot>
 
             <table class="table table-sm">

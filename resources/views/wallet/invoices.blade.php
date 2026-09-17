@@ -10,7 +10,7 @@
 
     @include('partials.sweetalert')
 
-    <x-adminlte-card icon="bi bi-file-earmark-text">
+    <x-adminlte-card>
         <x-slot name="titleSlot">Invoices</x-slot>
 
         <table class="table table-striped align-middle">
@@ -31,9 +31,9 @@
                         <td>RM{{ number_format($invoice->total, 2) }}</td>
                         <td>
                             @if($invoice->status === 'paid')
-                                <span class="text-success fw-semibold">Paid</span>
+                                <span class="pill pill-green">Paid</span>
                             @else
-                                <span class="text-warning fw-semibold">Unpaid</span>
+                                <span class="pill pill-amber">Unpaid</span>
                             @endif
                         </td>
                         <td>
@@ -53,7 +53,7 @@
 
     @if($invoices->isNotEmpty())
         @php($invoice = $invoices->first())
-        <x-adminlte-card icon="bi bi-receipt">
+        <x-adminlte-card>
             <x-slot name="titleSlot">{{ $invoice->invoice_no }} &middot; {{ $invoice->invoice_date->format('d M Y') }}</x-slot>
 
             <dl class="row mb-0">

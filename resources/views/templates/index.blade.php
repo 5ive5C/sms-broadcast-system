@@ -10,7 +10,7 @@
 
     @include('partials.sweetalert')
 
-    <x-adminlte-card icon="bi bi-file-earmark-text">
+    <x-adminlte-card>
         <x-slot name="titleSlot">Templates</x-slot>
 
         <div class="d-flex justify-content-end mb-3">

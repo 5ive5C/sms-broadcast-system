@@ -13,22 +13,22 @@
 
     <div class="row mb-4">
         <div class="col-md-3">
-            <x-adminlte-info-box title="Sent today" text="{{ number_format($sentToday) }}" icon="bi bi-send" />
+            <x-adminlte-info-box title="Sent today" text="{{ number_format($sentToday) }}" />
         </div>
         <div class="col-md-3">
-            <x-adminlte-info-box title="Delivered" text="{{ $deliveryRate }}%" icon="bi bi-check-circle" />
+            <x-adminlte-info-box title="Delivered" text="{{ $deliveryRate }}%" />
         </div>
         <div class="col-md-3">
-            <x-adminlte-info-box title="Awaiting status" text="{{ number_format($awaiting) }}" icon="bi bi-hourglass-split" />
+            <x-adminlte-info-box title="Awaiting status" text="{{ number_format($awaiting) }}" />
         </div>
         <div class="col-md-3">
-            <x-adminlte-info-box title="Balance" text="{{ number_format($wallet->balance) }}" icon="bi bi-wallet2" />
+            <x-adminlte-info-box title="Balance" text="{{ number_format($wallet->balance) }}" />
         </div>
     </div>
 
     <div class="row">
         <div class="col-lg-7 mb-4">
-            <x-adminlte-card icon="bi bi-bar-chart">
+            <x-adminlte-card>
                 <x-slot name="titleSlot">Volume by Hour</x-slot>
 
                 <canvas id="volume-chart" height="90"></canvas>
@@ -36,25 +36,25 @@
         </div>
 
         <div class="col-lg-5 mb-4">
-            <x-adminlte-card icon="bi bi-exclamation-triangle">
+            <x-adminlte-card>
                 <x-slot name="titleSlot">Needs Attention</x-slot>
 
-                <ul class="list-unstyled mb-0">
+                <div class="d-flex flex-column gap-2">
                     @if($runwayDays)
-                        <li class="mb-2"><i class="bi bi-dot"></i> Balance covers about {{ $runwayDays }} days at current volume.</li>
+                        <div class="p-3 rounded-3 pill-amber-box">Balance covers about {{ $runwayDays }} days at current volume.</div>
                     @endif
                     @if($failedLast7Days > 0)
-                        <li class="mb-2"><i class="bi bi-dot"></i> {{ number_format($failedLast7Days) }} failed messages in the last 7 days.</li>
+                        <div class="p-3 rounded-3 pill-red-box">{{ number_format($failedLast7Days) }} failed messages in the last 7 days.</div>
                     @endif
                     @if($sendingCampaign)
-                        <li class="mb-2">
-                            <i class="bi bi-dot"></i> Campaign "{{ $sendingCampaign->name }}" is {{ $sendingCampaign->progressPercent() }}% dispatched.
-                        </li>
+                        <div class="p-3 rounded-3 pill-gray-box">
+                            Campaign "{{ $sendingCampaign->name }}" is {{ $sendingCampaign->progressPercent() }}% dispatched.
+                        </div>
                     @endif
                     @if(! $runwayDays && $failedLast7Days === 0 && ! $sendingCampaign)
-                        <li class="text-body-secondary">Nothing needs attention right now.</li>
+                        <div class="text-body-secondary">Nothing needs attention right now.</div>
                     @endif
-                </ul>
+                </div>
             </x-adminlte-card>
         </div>
     </div>
@@ -71,9 +71,19 @@
 
         const ctx = document.getElementById('volume-chart');
         if (ctx && window.Chart) {
+            // Three-step intensity per the deck's chart spec: light/mid/peak
+            // purple depending on how tall the bar is relative to the max.
+            const max = Math.max(...data, 1);
+            const colors = data.map((v) => {
+                const ratio = v / max;
+                if (ratio >= 0.75) return '#6f5cd8';
+                if (ratio >= 0.4) return '#a99bf0';
+                return '#d8d3f6';
+            });
+
             new Chart(ctx, {
                 type: 'bar',
-                data: { labels, datasets: [{ label: 'Messages', data, backgroundColor: '#0d6efd' }] },
+                data: { labels, datasets: [{ label: 'Messages', data, backgroundColor: colors, borderRadius: 3 }] },
                 options: { plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true } } },
             });
         }

@@ -10,7 +10,7 @@
 
     @include('partials.sweetalert')
 
-    <x-adminlte-card icon="bi bi-journal-text">
+    <x-adminlte-card>
         <x-slot name="titleSlot">Audit Log</x-slot>
 
         <form method="get" class="row g-2 align-items-end mb-3">

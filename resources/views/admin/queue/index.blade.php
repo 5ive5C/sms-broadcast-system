@@ -21,7 +21,7 @@
         @endforeach
     </div>
 
-    <x-adminlte-card icon="bi bi-list-task">
+    <x-adminlte-card>
         <x-slot name="titleSlot">Job Batches</x-slot>
 
         <table class="table table-striped align-middle">
@@ -42,7 +42,7 @@
                         <td>{{ $batch['lane'] }}</td>
                         <td>{{ number_format($batch['pending']) }}</td>
                         <td>
-                            <span class="badge text-bg-{{ $batch['state'] === 'Running' ? 'success' : 'info' }}">{{ $batch['state'] }}</span>
+                            <span class="pill pill-{{ $batch['state'] === 'Running' ? 'green' : 'amber' }}">{{ $batch['state'] }}</span>
                         </td>
                     </tr>
                 @empty
@@ -54,7 +54,7 @@
         </table>
     </x-adminlte-card>
 
-    <x-adminlte-card icon="bi bi-speedometer2">
+    <x-adminlte-card>
         <x-slot name="titleSlot">Dispatch Rate Limit</x-slot>
 
         <div class="d-flex align-items-center gap-3">

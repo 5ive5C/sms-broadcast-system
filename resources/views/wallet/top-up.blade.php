@@ -12,7 +12,7 @@
 
     <div class="row">
         <div class="col-lg-7 mb-4">
-            <x-adminlte-card icon="bi bi-cash-coin">
+            <x-adminlte-card>
                 <x-slot name="titleSlot">Request Top-Up</x-slot>
 
                 <form action="{{ route('wallet.top-up.store') }}" method="post" enctype="multipart/form-data" id="topup-form">
@@ -48,7 +48,7 @@
         </div>
 
         <div class="col-lg-5 mb-4">
-            <x-adminlte-card icon="bi bi-receipt">
+            <x-adminlte-card>
                 <x-slot name="titleSlot">Summary</x-slot>
 
                 @php($tier = $tiers->sortByDesc('min_credits')->first(fn($t) => $t->min_credits <= 100000) ?? $tiers->sortBy('min_credits')->first())

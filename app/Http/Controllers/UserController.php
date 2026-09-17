@@ -43,8 +43,8 @@ class UserController extends Controller
                 // ->addColumn('created_by', fn (User $user) => $user->creator?->name ?? '—')
                 // ->addColumn('updated_by', fn (User $user) => $user->editor?->name ?? '—')
                 ->addColumn('status', fn (User $user) => $user->is_active
-                    ? '<span class="text-success fw-semibold">Active</span>'
-                    : '<span class="text-danger fw-semibold">Suspended</span>')
+                    ? '<span class="pill pill-green">Active</span>'
+                    : '<span class="pill pill-gray">Suspended</span>')
                 ->addColumn('actions', fn (User $user) => view('users.partials.actions', [
                     'user' => $user,
                     'canManage' => $actor->can('update', $user),
