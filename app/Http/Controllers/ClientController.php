@@ -42,7 +42,7 @@ class ClientController extends Controller
                     'suspended' => '<span class="pill pill-gray">Suspended</span>',
                     default => '<span class="pill pill-red">Inactive</span>',
                 })
-                ->editColumn('created_at', fn (Client $client) => $client->created_at?->format('d-M-Y H:i:s'))
+                ->editColumn('created_at', fn (Client $client) => $client->created_at?->format('d-M-Y h:i A'))
                 ->addColumn('actions', fn (Client $client) => view('clients.partials.actions', ['client' => $client])->render())
                 ->rawColumns(['status', 'actions'])
                 ->toJson();

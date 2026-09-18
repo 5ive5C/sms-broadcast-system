@@ -7,7 +7,7 @@
         <div style="width: 100%; max-width: 420px;" class="px-3">
             <div class="card border-0 shadow-sm" style="border-radius: 6px;">
                 <div class="card-body p-4 p-md-5">
-                    <h1 class="fw-bold mb-1" style="color: var(--text-primary); font-size: 13px;">Sign in</h1>
+                    <h1 class="fw-bold mb-1" style="color: var(--text-primary); font-size: 15px;">Sign in</h1>
                     <p class="text-body-secondary mb-4">SMS Broadcast portal</p>
 
                     @if ($errors->any())
@@ -44,7 +44,7 @@
                             </div>
 
                             @if (Route::has('password.request'))
-                                <a href="{{ route('password.request') }}" class="small">Forgot password?</a>
+                                <a href="{{ route('password.request') }}">Forgot password?</a>
                             @endif
                         </div>
 

@@ -122,7 +122,7 @@ body,
 .app-bg {
     background-color: var(--page-bg) !important;
     font-family: var(--font-sans);
-    font-size: 12px;
+    font-size: 14px;
     color: var(--text-primary);
 }
 
@@ -143,21 +143,21 @@ pre,
  */
 
 .content-header h1 {
-    font-size: 16px;
+    font-size: 17px;
     font-weight: 700;
     letter-spacing: -0.01em;
     color: var(--text-primary);
 }
 
 .form-label {
-    font-size: 11px;
+    font-size: 12px;
     color: var(--text-muted);
     font-weight: 400;
 }
 
 .form-control,
 .form-select {
-    font-size: 12px;
+    font-size: 13px;
     background-color: var(--card-bg);
     color: var(--text-primary);
     border-color: var(--border-input);
@@ -175,22 +175,22 @@ pre,
 }
 
 .btn {
-    font-size: 12px;
+    font-size: 13px;
     font-weight: 600;
     border-radius: 4px;
 }
 
 .btn-lg {
-    font-size: 12.5px;
+    font-size: 13.5px;
 }
 
 .btn-sm {
-    font-size: 11.5px;
+    font-size: 12.5px;
 }
 
 small,
 .small {
-    font-size: 11.5px;
+    font-size: 12.5px;
 }
 
 /* ---- Sidebar ---- */
@@ -207,7 +207,7 @@ small,
 
 .sidebar-brand .brand-text {
     color: var(--text-primary);
-    font-size: 14px;
+    font-size: 15px;
     font-weight: 700;
 }
 
@@ -224,7 +224,7 @@ small,
     border-radius: 5px;
     padding: 7px 8px;
     font-weight: 500;
-    font-size: 12.5px;
+    font-size: 13.5px;
 }
 
 .nav-sidebar .nav-link:hover {
@@ -314,7 +314,7 @@ small,
     border-bottom: 1px solid var(--border-card);
     font-weight: 700;
     color: var(--text-primary);
-    font-size: 13px;
+    font-size: 14px;
 }
 
 .info-box {
@@ -332,13 +332,13 @@ small,
 .info-box .info-box-text {
     color: var(--text-muted);
     font-weight: 500;
-    font-size: 11px;
+    font-size: 12px;
 }
 
 .info-box .info-box-number {
     color: var(--text-primary);
     font-weight: 700;
-    font-size: 20px;
+    font-size: 21px;
     line-height: 1.05;
 }
 
@@ -417,7 +417,7 @@ table.dataTable thead th {
     background-color: #4b49ac;
     color: #fff;
     font-weight: 600;
-    font-size: 11.5px;
+    font-size: 12.5px;
     border: none;
     vertical-align: middle;
     padding: 8px 11px;
@@ -429,7 +429,7 @@ table.dataTable thead th.dt-orderable-desc:hover {
 }
 
 .table td {
-    font-size: 12px;
+    font-size: 13px;
     padding: 6px 11px;
     vertical-align: middle;
 }
@@ -454,7 +454,7 @@ table.dataTable thead th.dt-orderable-desc:hover {
     display: inline-block;
     padding: 2.5px 6px;
     border-radius: 3px;
-    font-size: 10.5px;
+    font-size: 11.5px;
     font-weight: 700;
     line-height: 1.3;
 }
@@ -495,7 +495,7 @@ table.dataTable thead th.dt-orderable-desc:hover {
     background-color: var(--warning-panel-bg);
     border: 1px solid var(--warning-panel-border);
     color: var(--warning-text);
-    font-size: 11.5px;
+    font-size: 12.5px;
     line-height: 1.35;
 }
 
@@ -503,21 +503,21 @@ table.dataTable thead th.dt-orderable-desc:hover {
     background-color: var(--danger-panel-bg);
     border: 1px solid var(--danger-panel-border);
     color: var(--danger-text);
-    font-size: 11.5px;
+    font-size: 12.5px;
     line-height: 1.35;
 }
 
 .pill-gray-box {
     background-color: var(--page-bg);
     color: var(--text-secondary);
-    font-size: 11.5px;
+    font-size: 12.5px;
     line-height: 1.35;
 }
 
 .pill-green-box {
     background-color: var(--success-bg);
     color: var(--success-text);
-    font-size: 11.5px;
+    font-size: 12.5px;
     line-height: 1.35;
 }
 
@@ -527,7 +527,7 @@ table.dataTable thead th.dt-orderable-desc:hover {
     background-color: var(--purple-chip-bg);
     color: var(--purple-chip-text);
     font-family: var(--font-mono);
-    font-size: 11px;
+    font-size: 12px;
     border-radius: 3px;
     padding: 1px 6px;
 }

@@ -48,8 +48,8 @@
 
         <x-adminlte-datatable id="clients-table"
             :heads="[
-                'ID', 'Company Name', 'Slug', 'Pricing Tier',
-                'Balance', 'Status', 'Created At', ['label' => 'Actions', 'no-export' => true],
+                'ID', 'Company Name', 'Pricing Tier',
+                'Balance(CR)', 'Status', 'Created At', ['label' => 'Actions', 'no-export' => true],
             ]"
             striped hoverable with-buttons
             :config="[
@@ -66,7 +66,7 @@
                 'columns' => [
                     ['data' => 'id', 'name' => 'id'],
                     ['data' => 'name', 'name' => 'name'],
-                    ['data' => 'slug', 'name' => 'slug'],
+                    // ['data' => 'slug', 'name' => 'slug'],
                     ['data' => 'pricing_tier', 'name' => 'pricing_tier', 'orderable' => false, 'searchable' => false],
                     ['data' => 'balance', 'name' => 'balance', 'orderable' => false, 'searchable' => false],
                     ['data' => 'status', 'name' => 'status', 'orderable' => false, 'searchable' => false],
